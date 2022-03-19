@@ -126,10 +126,10 @@ local functions = {
     ['comfy_panel_spaghett_toggle'] = function(event)
         if event.element.switch_state == 'left' then
             global.comfy_panel_config.spaghett.enabled = true
-            get_actor(event, '{Spaghett}', 'has enabled spaghett mode!')
+            get_actor(event, '{Spaghett}', '已启用spaghett模式!')
         else
             global.comfy_panel_config.spaghett.enabled = nil
-            get_actor(event, '{Spaghett}', 'has disabled spaghett mode!')
+            get_actor(event, '{Spaghett}', '已禁用spaghett模式!')
         end
         spaghett()
     end,

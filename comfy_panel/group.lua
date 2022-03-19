@@ -232,23 +232,23 @@ local function on_gui_click(event)
         if new_group_name ~= '' and new_group_name ~= 'Name' and new_group_description ~= 'Description' then
             if this.alphanumeric then
                 if alphanumeric(new_group_name) then
-                    player.print('Group name is not valid.', {r = 0.90, g = 0.0, b = 0.0})
+                    player.print('队伍名称无效.', {r = 0.90, g = 0.0, b = 0.0})
                     return
                 end
 
                 if alphanumeric(new_group_description) then
-                    player.print('Group description is not valid.', {r = 0.90, g = 0.0, b = 0.0})
+                    player.print('队伍的描述是无效的.', {r = 0.90, g = 0.0, b = 0.0})
                     return
                 end
             end
 
             if string.len(new_group_name) > 64 then
-                player.print('Group name is too long. 64 characters maximum.', {r = 0.90, g = 0.0, b = 0.0})
+                player.print('队伍名称太长。最多64个字符.', {r = 0.90, g = 0.0, b = 0.0})
                 return
             end
 
             if string.len(new_group_description) > 128 then
-                player.print('Description is too long. 128 characters maximum.', {r = 0.90, g = 0.0, b = 0.0})
+                player.print('描述太长。最多128个字符.', {r = 0.90, g = 0.0, b = 0.0})
                 return
             end
 
@@ -263,7 +263,7 @@ local function on_gui_click(event)
                 b = player.color.b * 0.7 + 0.3,
                 a = 1
             }
-            game.print(player.name .. ' has founded a new group!', color)
+            game.print(player.name .. ' 已经成立了一个新的队伍!', color)
             game.print('>> ' .. new_group_name, {r = 0.98, g = 0.66, b = 0.22})
             game.print(new_group_description, {r = 0.85, g = 0.85, b = 0.85})
 
@@ -292,7 +292,7 @@ local function on_gui_click(event)
                         b = player.color.b * 0.7 + 0.3,
                         a = 1
                     }
-                    game.print(player.name .. ' has joined group "' .. event.element.parent.name .. '"', color)
+                    game.print(player.name .. ' 已加入队伍 "' .. event.element.parent.name .. '"', color)
                     this.join_spam_protection[player.name] = game.tick
                 end
                 refresh_gui()
@@ -308,7 +308,7 @@ local function on_gui_click(event)
                         end
                     end
                 end
-                game.print(player.name .. ' deleted group "' .. event.element.parent.name .. '"')
+                game.print(player.name .. ' 删除队伍 "' .. event.element.parent.name .. '"')
                 this.tag_groups[event.element.parent.name] = nil
                 refresh_gui()
                 return

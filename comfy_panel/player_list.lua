@@ -173,9 +173,9 @@ local pokemessages = {
     "Obama's birth certificate",
     'a deck of Cards Against Humanity',
     'a copy of META MEME HUMOR for Dummies',
-    'an abandoned, not-so-young-anymore puppy',
-    'one of those useless items advertised on TV',
-    'a genetic blueprint of a Japanese teen idol'
+    '一只被遗弃的、年龄不大的小狗',
+    '电视广告中那些没用的东西之一',
+    '日本青少年偶像的基因蓝图'
 }
 
 local function get_formatted_playtime(x)
@@ -498,16 +498,16 @@ local function player_list_show(player, frame, sort_by)
 
         if game.players[player_list[i].name].admin then
             trusted = '[color=red][A][/color]'
-            tooltip = 'This player is an admin of this server.\nLeft-click to show this person on map!'
+            tooltip = '这个玩家是这个服务器的管理员.\n左键单击以在地图上显示这个人。!'
         elseif jailed[player_list[i].name] then
             trusted = '[color=orange][J][/color]'
-            tooltip = 'This player is currently jailed.\nLeft-click to show this person on map!'
+            tooltip = '这名玩家目前已被监禁.\n左键单击以在地图上显示这个人。!'
         elseif play_table[player_list[i].name] then
             trusted = '[color=green][T][/color]'
-            tooltip = 'This player is trusted.\nLeft-click to show this person on map!'
+            tooltip = '这名玩家值得信赖.\n左键单击以在地图上显示这个人。!'
         else
             trusted = '[color=yellow][U][/color]'
-            tooltip = 'This player is not trusted.\nLeft-click to show this person on map!'
+            tooltip = '这名玩家不被信任.\n左键单击以在地图上显示这个人。!'
         end
 
         local caption

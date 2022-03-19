@@ -405,7 +405,7 @@ local function draw_main_frame(left, player)
             type = 'button',
             caption = 'Create Poll',
             enabled = false,
-            tooltip = 'Sorry, you need to be trusted to create polls.'
+            tooltip = '对不起，你需要被信任才能创建民意调查.'
         }
         apply_button_style(create_poll_button)
     end
@@ -475,7 +475,7 @@ local function redraw_create_poll_content(data)
     grid.add {
         type = 'label',
         caption = 'Duration:',
-        tooltip = 'Pro tip: Use mouse wheel or arrow keys for more fine control.'
+        tooltip = '专业提示：使用鼠标滚轮或方向键进行更精细的控制.'
     }
 
     local duration_flow = grid.add {type = 'flow', direction = 'horizontal'}
@@ -519,7 +519,7 @@ local function redraw_create_poll_content(data)
                 type = 'sprite-button',
                 name = create_poll_delete_answer_name,
                 sprite = 'utility/trash',
-                tooltip = 'Delete answer field.'
+                tooltip = '删除答案字段.'
             }
             delete_button.style.height = 26
             delete_button.style.width = 26
@@ -650,7 +650,7 @@ end
 
 local function show_new_poll(poll_data)
     local message =
-        table.concat {poll_data.created_by.name, ' has created a new Poll #', poll_data.id, ': ', poll_data.question}
+        table.concat {poll_data.created_by.name, ' 已经创建了一个新的投票 #', poll_data.id, ': ', poll_data.question}
 
     for _, p in pairs(game.connected_players) do
         local left = p.gui.left
@@ -830,7 +830,7 @@ local function player_joined(event)
             type = 'sprite-button',
             name = main_button_name,
             sprite = 'item/programmable-speaker',
-            tooltip = 'Let your question be heard!'
+            tooltip = '让大家听到你的问题!'
         }
         element_style({element = button, x = 38, y = 38, pad = -2})
         --[[
@@ -1058,7 +1058,7 @@ Gui.on_click(
 
         local new_question = data.question
         if not new_question:find('%S') then
-            player.print('Sorry, the poll needs a question.')
+            player.print('对不起，投票需要一个问题.')
             return
         end
 
@@ -1080,7 +1080,7 @@ Gui.on_click(
         end
 
         if not next(new_answers) then
-            player.print('Sorry, the poll needs at least one answer.')
+            player.print('对不起，这个投票至少需要一个答案.')
             return
         end
 
@@ -1134,7 +1134,7 @@ Gui.on_click(
             poll_index = #polls
         end
 
-        local message = table.concat {player.name, ' has edited Poll #', poll.id, ': ', poll.question}
+        local message = table.concat {player.name, ' 已编辑 投票 #', poll.id, ': ', poll.question}
 
         for _, p in pairs(game.connected_players) do
             local main_frame = p.gui.left[main_frame_name]
@@ -1238,26 +1238,26 @@ end
 
 function Class.validate(data)
     if type(data) ~= 'table' then
-        return false, 'argument must be of type table'
+        return false, '参数必须是表的类型'
     end
 
     local question = data.question
     if type(question) ~= 'string' or question == '' then
-        return false, 'field question must be a non empty string.'
+        return false, '字段问题必须是一个非空字符串.'
     end
 
     local answers = data.answers
     if type(answers) ~= 'table' then
-        return false, 'answers field must be an array.'
+        return false, '答案字段必须是一个数组.'
     end
 
     if #answers == 0 then
-        return false, 'answer array must contain at least one entry.'
+        return false, '答案数组必须至少包含一个条目.'
     end
 
     for _, a in pairs(answers) do
         if type(a) ~= 'string' or a == '' then
-            return false, 'answers must be a non empty string.'
+            return false, '答案必须是一个非空字符串。'
         end
     end
 
@@ -1265,10 +1265,10 @@ function Class.validate(data)
     local duration_type = type(duration)
     if duration_type == 'number' then
         if duration < 0 then
-            return false, 'duration cannot be negative, set duration to 0 for endless poll.'
+            return false, '持续时间不能为负数，将持续时间设置为0，以便进行无休止的轮询。.'
         end
     elseif duration_type ~= 'nil' then
-        return false, 'duration must be of type number or nil'
+        return false, '持续时间必须是数字类型或零'
     end
 
     return true

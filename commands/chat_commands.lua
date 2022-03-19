@@ -33,28 +33,28 @@ local function chat_with_team(message, team)
     end
 end
 
-commands.add_command('sth', 'Chat with south. Same as /south-chat',
+commands.add_command('sth', '与南方聊天。你可以使用 /south-chat',
                      function(cmd)
     local message = tostring(cmd.parameter)
     chat_with_team(message, 'south')
 end)
 
-commands.add_command('south-chat', 'Chat with south. You can also use /sth',
+commands.add_command('south-chat', '与南方聊天。你可以使用/sth',
                      function(cmd)
-    game.player.print("System: You can also you /sth")
+    game.player.print("系统:你也可以用/sth")
     local message = tostring(cmd.parameter)
     chat_with_team(message, 'south')
 end)
 
-commands.add_command('nth', 'Chat with north. Same as /north-chat',
+commands.add_command('nth', '与北方聊天。与/north-chat相同',
                      function(cmd)
     local message = tostring(cmd.parameter)
     chat_with_team(message, 'north')
 end)
 
-commands.add_command('north-chat', 'Chat with north. You can also use /nth',
+commands.add_command('north-chat', '与北方聊天。你可以使用/nth',
                      function(cmd)
-    game.player.print("System: You can also you /nth")
+    game.player.print("系统:你也可以用/nth")
     local message = tostring(cmd.parameter)
     chat_with_team(message, 'north')
 end)

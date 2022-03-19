@@ -6,18 +6,18 @@ local function force_map_reset(reason)
 
     if player and player ~= nil then
         if not player.admin then
-            player.print("[ERROR] Command is admin-only. Please ask an admin.",
+            player.print("[ERROR] 命令是管理员专用的。请询问管理员。",
                          Color.warning)
             return
         elseif not reason or string.len(reason) <= 5 then
-            player.print("[ERROR] Please enter reason, min length of 5")
+            player.print("[错误]请输入原因，最小长度为5。")
         else
 	    if not global.rocket_silo["north"].valid then
-		game.print("[ERROR] Map is during reset already")
+		game.print("[错误]地图已经在重置过程中了")
 		return
 	    end
 
-            msg ="Admin " .. player.name .. " initiated map reset. Reason: " .. reason
+            msg ="Admin " .. player.name .. " 启动地图重置。原因是。 " .. reason
             game.print(msg, Color.warning)
             Server.to_discord_embed(msg)
             local p = global.rocket_silo["north"].position
@@ -27,5 +27,5 @@ local function force_map_reset(reason)
 end
 
 commands.add_command('force-map-reset',
-                     'force map reset by killing north silo: /force-map-reset <reason> ',
+                     '通过杀死北面的筒仓来强制重置地图: /force-map-reset <原因> ',
                      function(cmd) force_map_reset(cmd.parameter); end)

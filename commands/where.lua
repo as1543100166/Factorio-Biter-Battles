@@ -59,7 +59,7 @@ commands.add_command(
             if validate_player(target_player) then
                 create_mini_camera_gui(player, target_player.name, target_player.position, target_player.surface.index)
             else
-                player.print('Please type a name of a player who is connected.', Color.warning)
+                player.print('请输入一个连接的玩家的名字。', Color.warning)
             end
         else
             return

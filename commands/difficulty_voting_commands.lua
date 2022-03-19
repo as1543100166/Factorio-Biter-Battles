@@ -6,14 +6,14 @@ local function revote()
 
     if player and player ~= nil then
         if not player.admin then
-            player.print("[ERROR] Command is admin-only. Please ask an admin.", Color.warning)
+            player.print("[ERROR] 命令是管理员专用的。请询问管理员。", Color.warning)
             return
 
         else
             local tick = game.ticks_played
             global.difficulty_votes_timeout = tick + 10800
             global.difficulty_player_votes = {}
-            msg = player.name .. " opened difficulty voting. Voting enabled for 3 mins"
+            msg = player.name .. " 开启了困难投票。投票启用了3分钟"
             game.print(msg)
             Server.to_discord_embed(msg)
         end
@@ -25,11 +25,11 @@ local function close_difficulty_votes()
 
     if player and player ~= nil then
         if not player.admin then
-            player.print("[ERROR] Command is admin-only. Please ask an admin.", Color.warning)
+            player.print("[ERROR] 命令是管理员专用的。请询问管理员。", Color.warning)
             return
         else
             global.difficulty_votes_timeout = game.ticks_played
-            msg = player.name .. " closed difficulty voting"
+            msg = player.name .. " 关闭困难投票"
             game.print(msg)
             Server.to_discord_embed(msg)
         end

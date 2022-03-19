@@ -20,7 +20,7 @@ local valid_special_games = {
 	}
 	]]
 	turtle = {
-		name = {type = "label", caption = "Turtle", tooltip = "Generate moat with given dimensions around the spawn"},
+		name = {type = "label", caption = "Turtle", tooltip = "在出生地周围生成具有指定尺寸的护城河"},
 		config = {
 			[1] = {name = "label1", type = "label", caption = "moat width"},
 			[2] = {name = 'moat_width', type = "textfield", text = "5", numeric = true, width = 40},
@@ -36,9 +36,9 @@ local valid_special_games = {
 	},
 
 	infinity_chest = {
-		name = {type = "label", caption = "Infinity chest", tooltip = "Spawn infinity chests with given filters"},
+		name = {type = "label", caption = "Infinity chest", tooltip = "用给定的过滤器生成无限的箱子"},
 		config = {
-			[1] = {name = "separate_chests", type = "switch", switch_state = "left", tooltip = "Single chest / Multiple chests"},
+			[1] = {name = "separate_chests", type = "switch", switch_state = "left", tooltip = "单个箱子/多个箱子"},
 			[2] = {name = "operable", type = "switch", switch_state = "left", tooltip = "Operable? Y / N"},
 			[3] = {name = "label1", type = "label", caption = "Gap size"},
 			[4] = {name = "gap", type = "textfield", text = "3", numeric = true, width = 40},
@@ -59,7 +59,7 @@ function Public.reset_active_special_games() for _, i in ipairs(global.active_sp
 function Public.reset_special_games_variables() global.special_games_variables = {} end
 
 local function generate_turtle(moat_width, entrance_width, size_x, size_y)
-	game.print("Special game turtle is being generated!", Color.warning)
+	game.print("正在生成特殊游戏“海龟”!", Color.warning)
 	local surface = game.surfaces[global.bb_surface_name]
 	local water_positions = {}
 	local concrete_positions = {}
@@ -104,7 +104,7 @@ local function generate_infinity_chest(separate_chests, operable, gap, eq)
 	local objects = surface.find_entities_filtered {name = 'infinity-chest'}
 	for _, object in pairs(objects) do object.destroy() end
 
-	game.print("Special game Infinity chest is being generated!", Color.warning)
+	game.print("特别游戏《无限大》的箱子正在生成!", Color.warning)
 	if operable == "left" then
 		operable = true
 	else
@@ -149,7 +149,7 @@ end
 
 local create_special_games_panel = (function(player, frame)
 	frame.clear()
-	frame.add{type = "label", caption = "Configure and apply special games here"}.style.single_line = false
+	frame.add{type = "label", caption = "在这里配置和应用特殊游戏"}.style.single_line = false
 
 	for k, v in pairs(valid_special_games) do
 		local a = frame.add {type = "frame"}
@@ -178,7 +178,7 @@ local function on_gui_click(event)
 		flow.add {type = "button", name = string.gsub(element.name, "_apply", "_confirm"), caption = "Confirm"}
 		flow.add {type = "button", name = "cancel", caption = "Cancel"}
 		element.visible = false -- hides Apply button	
-		player.print("[SPECIAL GAMES] Are you sure? This change will be reversed only on map restart!", Color.cyan)
+		player.print("[特殊游戏]你确定吗？只有在地图重新启动时，此更改才会反转！", Color.cyan)
 
 	elseif string.find(element.name, "_confirm") then
 		config = element.parent.parent.children[2]

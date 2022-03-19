@@ -18,7 +18,7 @@ commands.add_command(
             if player ~= nil then
                 p = player.print
                 if not player.admin then
-                    p("[ERROR] You're not admin!", Color.fail)
+                    p("[错误] 你不是管理员!", Color.fail)
                     return
                 end
             else
@@ -27,20 +27,20 @@ commands.add_command(
         end
 
         if param == nil then
-            player.print('[ERROR] Arguments are true/false', Color.yellow)
+            player.print('[错误]参数为 true/false', Color.yellow)
             return
         end
         if param == 'true' then
             if not _a.spaghetti_are_you_sure then
                 _a.spaghetti_are_you_sure = true
-                player.print('Spaghetti is not enabled, run this command again to enable spaghett', Color.yellow)
+                player.print('Spaghetti未被启用，再次运行此命令以启用spaghett', Color.yellow)
                 return
             end
             if _a.spaghetti_enabled == true then
-                player.print('Spaghetti is already enabled.', Color.yellow)
+                player.print('Spaghetti 已被启用.', Color.yellow)
                 return
             end
-            game.print('The world has been spaghettified!', Color.success)
+            game.print('这个世界已经被修饰了!', Color.success)
             force.technologies['logistic-system'].enabled = false
             force.technologies['construction-robotics'].enabled = false
             force.technologies['logistic-robotics'].enabled = false
@@ -68,10 +68,10 @@ commands.add_command(
             _a.spaghetti_enabled = true
         elseif param == 'false' then
             if _a.spaghetti_enabled == false or _a.spaghetti_enabled == nil then
-                player.print('Spaghetti is already disabled.', Color.yellow)
+                player.print('Spaghetti 已被禁用.', Color.yellow)
                 return
             end
-            game.print('The world is no longer spaghett!', Color.yellow)
+            game.print('世界不再是spaghett!', Color.yellow)
             force.technologies['logistic-system'].enabled = true
             force.technologies['construction-robotics'].enabled = true
             force.technologies['logistic-robotics'].enabled = true
@@ -115,7 +115,7 @@ commands.add_command(
             if player ~= nil then
                 p = player.print
                 if not player.admin then
-                    p("[ERROR] You're not admin!", Color.fail)
+                    p("[错误] 你不是管理员!", Color.fail)
                     return
                 end
             else
@@ -123,18 +123,18 @@ commands.add_command(
             end
         end
         if param == nil then
-            player.print('[ERROR] Must specify radius!', Color.fail)
+            player.print('[ERROR] 必须指定半径!', Color.fail)
             return
         end
         if param > 50 then
-            player.print('[ERROR] Value is too big.', Color.fail)
+            player.print('[ERROR] 数值太大。', Color.fail)
             return
         end
 
         if not _a.generate_map then
             _a.generate_map = true
             player.print(
-                '[WARNING] This command will make the server LAG, run this command again if you really want to do this!',
+                '[警告]这个命令将使服务器变成LAG，如果你真的想这样做，请再运行这个命令',
                 Color.yellow
             )
             return
@@ -142,7 +142,7 @@ commands.add_command(
         local radius = param
         local surface = game.players[1].surface
         if surface.is_chunk_generated({radius, radius}) then
-            game.print('Map generation done!', Color.success)
+            game.print('地图生成完成!', Color.success)
             _a.generate_map = nil
             return
         end
@@ -151,7 +151,7 @@ commands.add_command(
         for _, pl in pairs(game.connected_players) do
             pl.play_sound {path = 'utility/new_objective', volume_modifier = 1}
         end
-        game.print('Map generation done!', Color.success)
+        game.print('地图生成完成!', Color.success)
         _a.generate_map = nil
     end
 )
@@ -169,7 +169,7 @@ commands.add_command(
             if player ~= nil then
                 p = player.print
                 if not player.admin then
-                    p("[ERROR] You're not admin!", Color.warning)
+                    p("[错误] 你不是管理员!", Color.warning)
                     return
                 end
             else
@@ -179,7 +179,7 @@ commands.add_command(
         if not _a.dump_layout then
             _a.dump_layout = true
             player.print(
-                '[WARNING] This command will make the server LAG, run this command again if you really want to do this!',
+                '[警告]这个命令将使服务器变成LAG，如果你真的想这样做，请再运行这个命令',
                 Color.yellow
             )
             return
@@ -223,7 +223,7 @@ commands.add_command(
             str = str .. t.name
             str = str .. '"},'
             game.write_file('layout.lua', str .. '\n', true)
-            player.print('Dumped layout as file: layout.lua', Color.success)
+            player.print('将布局转储为文件： layout.lua', Color.success)
         end
         _a.dump_layout = false
     end
@@ -242,7 +242,7 @@ commands.add_command(
             if player ~= nil then
                 p = player.print
                 if not player.admin then
-                    p("[ERROR] You're not admin!", Color.fail)
+                    p("[错误] 你不是管理员!", Color.fail)
                     return
                 end
             else
@@ -252,18 +252,18 @@ commands.add_command(
         if not _a.creative_are_you_sure then
             _a.creative_are_you_sure = true
             player.print(
-                '[WARNING] This command will enable creative/cheat-mode for all connected players, run this command again if you really want to do this!',
+                '[警告]此命令将为所有连接的玩家启用创造/作弊模式，如果你真的想这样做，请再次运行此命令',
                 Color.yellow
             )
             return
         end
         if _a.creative_enabled == true then
-            player.print('[ERROR] Creative/cheat-mode is already active!', Color.fail)
+            player.print('[ERROR] 创造/作弊模式已经激活!', Color.fail)
             return
         end
 
-        game.print(player.name .. ' has activated creative-mode!', Color.warning)
-        Server.to_discord_bold(table.concat {'[Creative] ' .. player.name .. ' has activated creative-mode!'})
+        game.print(player.name .. ' 激活了创造模式!', Color.warning)
+        Server.to_discord_bold(table.concat {'[Creative] ' .. player.name .. ' 激活了创造模式!'})
 
         for k, v in pairs(game.connected_players) do
             v.cheat_mode = true
@@ -297,7 +297,7 @@ commands.add_command(
                         _a[k].character_inventory_slots_bonus['creative'] = tonumber(i)
                         v.character_inventory_slots_bonus = _a[k].character_inventory_slots_bonus['creative']
                         v.insert {name = _k, count = _v.stack_size}
-                        v.print('Inserted all base items.', Color.success)
+                        v.print('插入了所有基础项目.', Color.success)
                         _a.creative_enabled = true
                     end
                 end
@@ -308,7 +308,7 @@ commands.add_command(
 
 commands.add_command(
     'delete-uncharted-chunks',
-    'Deletes all chunks that are not charted. Can reduce filesize of the savegame. May be unsafe to use in certain custom maps.',
+    '删除所有不在图表中的区块。可以减少保存游戏的文件大小。在某些自定义地图中使用可能不安全。',
     function()
         local player = game.player
         local p
@@ -316,7 +316,7 @@ commands.add_command(
             if player ~= nil then
                 p = player.print
                 if not player.admin then
-                    p("[ERROR] You're not admin!", Color.fail)
+                    p("[错误] 你不是管理员!", Color.fail)
                     return
                 end
             else
@@ -349,7 +349,7 @@ commands.add_command(
             end
         end
 
-        local message = player.name .. ' deleted ' .. count .. ' uncharted chunks!'
+        local message = player.name .. ' 删除了 ' .. count .. ' 未知的区块!'
         game.print(message, Color.warning)
         Server.to_discord_bold(table.concat {message})
     end
