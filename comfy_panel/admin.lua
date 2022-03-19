@@ -11,37 +11,37 @@ local lower = string.lower
 local function admin_only_message(str)
     for _, player in pairs(game.connected_players) do
         if player.admin == true then
-            player.print('Admins-only-message: ' .. str, {r = 0.88, g = 0.88, b = 0.88})
+            player.print('管理员专用消息: ' .. str, {r = 0.88, g = 0.88, b = 0.88})
         end
     end
 end
 
 local function jail(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     Jailed.try_ul_data(player.name, true, source_player.name)
 end
 
 local function free(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     Jailed.try_ul_data(player.name, false, source_player.name)
 end
 
 local bring_player_messages = {
-    'Come here my friend!',
-    'Papers, please.',
-    'What are you up to?'
+    '过来我的朋友!',
+    '请出示证件.',
+    '你在做什么?'
 }
 
 local function bring_player(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     if player.driving == true then
-        source_player.print('Target player is in a vehicle, teleport not available.', {r = 0.88, g = 0.88, b = 0.88})
+        source_player.print('目标玩家在车辆中，无法进行传送.', {r = 0.88, g = 0.88, b = 0.88})
         return
     end
     local pos = source_player.surface.find_non_colliding_position('character', source_player.position, 50, 1)
@@ -49,7 +49,7 @@ local function bring_player(player, source_player)
         player.teleport(pos, source_player.surface)
         game.print(
             player.name ..
-                ' has been teleported to ' ..
+                ' 已被传送到 ' ..
                     source_player.name .. '. ' .. bring_player_messages[math.random(1, #bring_player_messages)],
             {r = 0.98, g = 0.66, b = 0.22}
         )
@@ -57,12 +57,12 @@ local function bring_player(player, source_player)
 end
 
 local go_to_player_messages = {
-    'Papers, please.',
-    'What are you up to?'
+    '请出示证件.',
+    '你在做什么?'
 }
 local function go_to_player(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     local pos = player.surface.find_non_colliding_position('character', player.position, 50, 1)
     if pos then
@@ -77,7 +77,7 @@ end
 
 local function spank(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     if player.character then
         if player.character.health > 1 then
@@ -90,12 +90,12 @@ local function spank(player, source_player)
 end
 
 local damage_messages = {
-    ' recieved a love letter from ',
-    ' recieved a strange package from '
+    ' 收到了一封来自 ',
+    ' 收到了一个奇怪的包裹，来自 '
 }
 local function damage(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     if player.character then
         if player.character.health > 1 then
@@ -111,15 +111,15 @@ local function damage(player, source_player)
 end
 
 local kill_messages = {
-    ' did not obey the law.',
-    ' should not have triggered the admins.',
-    ' did not respect authority.',
-    ' had a strange accident.',
-    ' was struck by lightning.'
+    ' 不遵守法律.',
+    ' 不应该触发管理员.',
+    ' 不尊重其他人.',
+    ' 发生了一个奇怪的事故.',
+    ' 被雷击中了.'
 }
 local function kill(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     if player.character then
         player.character.die('player')
@@ -129,31 +129,31 @@ local function kill(player, source_player)
 end
 
 local enemy_messages = {
-    'Shoot on sight!',
-    'Wanted dead or alive!'
+    '见人就射!',
+    '被通缉的死人或活人!'
 }
 local function enemy(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     if not game.forces.enemy_players then
         game.create_force('enemy_players')
     end
     player.force = game.forces.enemy_players
     game.print(
-        player.name .. ' is now an enemy! ' .. enemy_messages[math.random(1, #enemy_messages)],
+        player.name .. ' 现在是敌人了! ' .. enemy_messages[math.random(1, #enemy_messages)],
         {r = 0.95, g = 0.15, b = 0.15}
     )
-    admin_only_message(source_player.name .. ' has turned ' .. player.name .. ' into an enemy')
+    admin_only_message(source_player.name .. ' 已转为 ' .. player.name .. ' 变成敌人')
 end
 
 local function ally(player, source_player)
     if player.name == source_player.name then
-        return player.print("You can't select yourself!", {r = 1, g = 0.5, b = 0.1})
+        return player.print("你不能选择自己!", {r = 1, g = 0.5, b = 0.1})
     end
     player.force = game.forces.player
-    game.print(player.name .. ' is our ally again!', {r = 0.98, g = 0.66, b = 0.22})
-    admin_only_message(source_player.name .. ' made ' .. player.name .. ' our ally')
+    game.print(player.name .. ' 又是我们的盟友!', {r = 0.98, g = 0.66, b = 0.22})
+    admin_only_message(source_player.name .. ' made ' .. player.name .. ' 我们的盟友')
 end
 
 local function turn_off_global_speakers(player)
@@ -172,9 +172,9 @@ local function turn_off_global_speakers(player)
         return
     end
     if counter == 1 then
-        game.print(player.name .. ' has nuked ' .. counter .. ' global speaker.', {r = 0.98, g = 0.66, b = 0.22})
+        game.print(player.name .. ' 已经核爆了 ' .. counter .. ' 所有发言者', {r = 0.98, g = 0.66, b = 0.22})
     else
-        game.print(player.name .. ' has nuked ' .. counter .. ' global speakers.', {r = 0.98, g = 0.66, b = 0.22})
+        game.print(player.name .. ' 已经核爆了 ' .. counter .. ' 所有发言者.', {r = 0.98, g = 0.66, b = 0.22})
     end
 end
 
@@ -190,11 +190,11 @@ local function delete_all_blueprints(player)
         return
     end
     if counter == 1 then
-        game.print(counter .. ' blueprint has been cleared!', {r = 0.98, g = 0.66, b = 0.22})
+        game.print(counter .. ' 蓝图已被清除!', {r = 0.98, g = 0.66, b = 0.22})
     else
-        game.print(counter .. ' blueprints have been cleared!', {r = 0.98, g = 0.66, b = 0.22})
+        game.print(counter .. ' 蓝图已被清除!', {r = 0.98, g = 0.66, b = 0.22})
     end
-    admin_only_message(player.name .. ' has cleared all blueprints.')
+    admin_only_message(player.name .. ' 已经清除了所有的蓝图.')
 end
 
 local function create_mini_camera_gui(player, caption, position, surface)
@@ -293,7 +293,7 @@ local function draw_events(data)
                     {
                         type = 'label',
                         caption = history_index[history][i],
-                        tooltip = 'Click to open mini camera.'
+                        tooltip = '点击打开迷你摄像头.'
                     }
                 )
                 ::continue::
@@ -312,7 +312,7 @@ local function draw_events(data)
                 {
                     type = 'label',
                     caption = history_index[history][i],
-                    tooltip = 'Click to open mini camera.'
+                    tooltip = '点击打开迷你摄像头.'
                 }
             )
             ::continue::
@@ -383,16 +383,16 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Jail',
                 name = 'jail',
-                tooltip = 'Jails the player, they will no longer be able to perform any actions except writing in chat.'
+                tooltip = '囚禁玩家，他们将不再能够执行任何行动，除了聊天。.'
             }
         ),
-        t.add({type = 'button', caption = 'Free', name = 'free', tooltip = 'Frees the player from jail.'}),
+        t.add({type = 'button', caption = 'Free', name = 'free', tooltip = '将玩家从监狱中释放出来.'}),
         t.add(
             {
                 type = 'button',
                 caption = 'Bring Player',
                 name = 'bring_player',
-                tooltip = 'Teleports the selected player to your position.'
+                tooltip = '将被选中的玩家传送到你的位置.'
             }
         ),
         t.add(
@@ -400,7 +400,7 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Make Enemy',
                 name = 'enemy',
-                tooltip = 'Sets the selected players force to enemy_players.          DO NOT USE IN PVP MAPS!!'
+                tooltip = '将所选玩家的力量设置为敌方玩家。         不要在Pvp地图中使用！!'
             }
         ),
         t.add(
@@ -408,7 +408,7 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Make Ally',
                 name = 'ally',
-                tooltip = 'Sets the selected players force back to the default player force.           DO NOT USE IN PVP MAPS!!'
+                tooltip = '将所选玩家的武力值设置为默认玩家武力值。          不要在Pvp地图中使用！!'
             }
         ),
         t.add(
@@ -416,7 +416,7 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Go to Player',
                 name = 'go_to_player',
-                tooltip = 'Teleport yourself to the selected player.'
+                tooltip = '将自己传送到选定的玩家处.'
             }
         ),
         t.add(
@@ -424,7 +424,7 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Spank',
                 name = 'spank',
-                tooltip = 'Hurts the selected player with minor damage. Can not kill the player.'
+                tooltip = '对被选中的玩家造成轻微伤害。不能杀死该玩家。'
             }
         ),
         t.add(
@@ -432,10 +432,10 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Damage',
                 name = 'damage',
-                tooltip = 'Damages the selected player with greater damage. Can not kill the player.'
+                tooltip = '对被选中的玩家造成更大的伤害。不能杀死该玩家。'
             }
         ),
-        t.add({type = 'button', caption = 'Kill', name = 'kill', tooltip = 'Kills the selected player instantly.'})
+        t.add({type = 'button', caption = 'Kill', name = 'kill', tooltip = '瞬间杀死被选中的玩家.'})
     }
     for _, button in pairs(buttons) do
         button.style.font = 'default-bold'
@@ -456,7 +456,7 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Destroy global speakers',
                 name = 'turn_off_global_speakers',
-                tooltip = 'Destroys all speakers that are set to play sounds globally.'
+                tooltip = '摧毁所有设置为全局播放声音的扬声器.'
             }
         ),
         t.add(
@@ -464,7 +464,7 @@ local create_admin_panel = (function(player, frame)
                 type = 'button',
                 caption = 'Delete blueprints',
                 name = 'delete_all_blueprints',
-                tooltip = 'Deletes all placed blueprints on the map.'
+                tooltip = '删除地图上所有放置的蓝图.'
             }
         )
         ---	t.add({type = "button", caption = "Cancel all deconstruction orders", name = "remove_all_deconstruction_orders"})
@@ -648,7 +648,7 @@ local function on_gui_click(event)
             return
         end
         if target_player_name == 'Select Player' then
-            player.print('No target player selected.', {r = 0.88, g = 0.88, b = 0.88})
+            player.print('没有选择目标玩家.', {r = 0.88, g = 0.88, b = 0.88})
             return
         end
         local target_player = game.players[target_player_name]
@@ -729,7 +729,7 @@ end
 
 comfy_panel_tabs['Admin'] = {gui = create_admin_panel, admin = true}
 
-commands.add_command("kill", "Kill a player. Usage: /kill <name>", function(cmd)
+commands.add_command("kill", "杀死一个玩家。使用方法: /kill <name>", function(cmd)
 	if not cmd.player_index then return end
 	local killer = game.get_player(cmd.player_index)
 	if not killer then return end
@@ -738,16 +738,16 @@ commands.add_command("kill", "Kill a player. Usage: /kill <name>", function(cmd)
 		if killer.admin and victim and victim.valid then
 			kill(victim, killer)
 		elseif not victim or not victim.valid then
-			killer.print("Invalid name", Color.warning)
+			killer.print("无效名称", Color.warning)
 		else
-			killer.print("Only admins have licence for killing!", Color.warning)
+			killer.print("只有管理员才有杀人的许可!", Color.warning)
 		end
 	else
-		killer.print("Usage: /kill <name>", Color.warning)
+		killer.print("使用方法: /kill <name>", Color.warning)
 	end
 end)
 
-commands.add_command("punish", "Kill and ban a player. Usage: /punish <name> <reason>", function(cmd)
+commands.add_command("punish", "杀死并禁止一名玩家。使用方法。 /punish <name> <原因>", function(cmd)
 	if not cmd.player_index then return end
 	local punisher = game.get_player(cmd.player_index)
 	if not punisher then return end
@@ -759,20 +759,20 @@ commands.add_command("punish", "Kill and ban a player. Usage: /punish <name> <re
 		table.remove(t, 1)
 		message = table.concat(t, ' ')
 		if offender.valid and string.len(message) > 5 then
-			Server.to_discord_embed(offender.name .. " was banned by " .. punisher.name .. ". " .. "Reason: " .. message)
+			Server.to_discord_embed(offender.name .. " 被禁止 " .. punisher.name .. ". " .. "原因: " .. message)
 			message = message .. " Appeal on discord. Link on biterbattles.org", Color.warning
 			if offender.force.name == "spectator" then join_team(offender, global.chosen_team[offender.name], true) end -- switches offender to their team if he's spectating
 			kill(offender, punisher)
 			game.ban_player(offender, message)
 		elseif not offender.valid then
-			punisher.print("Invalid name", Color.warning)
+			punisher.print("无效名称", Color.warning)
 		else
-			punisher.print("No valid reason given, or reason is too short", Color.warning)
+			punisher.print("没有给出有效的理由，或者理由太短", Color.warning)
 		end
 	elseif not punisher.admin then
-		punisher.print("This is admin only command", Color.warning)
+		punisher.print("这只是管理员的命令", Color.warning)
 	else
-		punisher.print("Usage: /punish <name> <reason>", Color.warning)
+		punisher.print("使用方法: /punish <name> <reason>", Color.warning)
 	end
 end)
         
