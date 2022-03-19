@@ -901,7 +901,7 @@ function Public.enable_capsule_warning(value)
     return this.enable_capsule_warning
 end
 
---- If ANY actions should be performed when a player misbehaves.
+--- If ANY actions should be performed when a player misbehaves.1
 ---@param value <string>
 function Public.enable_capsule_cursor_warning(value)
     if value then
