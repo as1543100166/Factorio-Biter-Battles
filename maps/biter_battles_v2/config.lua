@@ -2,8 +2,8 @@
 
 local bb_config = {
 	--Optional custom team names, can also be modified via "Team Manager"
-	["north_side_team_name"] = "Team North",
-	["south_side_team_name"] = "Team South",
+	["north_side_team_name"] = "北队",
+	["south_side_team_name"] = "南队",
 
 	--TERRAIN OPTIONS--
 	["border_river_width"] = 44,						--Approximate width of the horizontal impassable river separating the teams. (values up to 100)

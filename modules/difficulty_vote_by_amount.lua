@@ -150,12 +150,12 @@ local function poll_difficulty(player)
     if game.tick > this.difficulty_poll_closing_timeout then
         if player.online_time ~= 0 then
             local t = math.abs(math.floor((this.difficulty_poll_closing_timeout - game.tick) / 3600))
-            local str = 'Votes have closed ' .. t
-            str = str .. ' minute'
+            local str = '投票已经结束 ' .. t
+            str = str .. ' 分钟'
             if t > 1 then
                 str = str .. 's'
             end
-            str = str .. ' ago.'
+            str = str .. ' 之前.'
             player.print(str)
         end
         return
@@ -164,7 +164,7 @@ local function poll_difficulty(player)
     local frame =
         player.gui.center.add {
         type = 'frame',
-        caption = 'Vote difficulty:',
+        caption = '投票难度:',
         name = 'difficulty_poll',
         direction = 'vertical'
     }
@@ -181,8 +181,8 @@ local function poll_difficulty(player)
         {
             type = 'button',
             name = 'close',
-            caption = 'Close (' ..
-                math.floor((this.difficulty_poll_closing_timeout - game.tick) / 3600) .. ' minutes left)'
+            caption = '关闭 (' ..
+                math.floor((this.difficulty_poll_closing_timeout - game.tick) / 3600) .. ' 分钟之前)'
         }
     )
     b.style.font_color = {r = 0.66, g = 0.0, b = 0.66}
@@ -195,7 +195,7 @@ local function set_difficulty()
 
     if this.difficulty_vote_index ~= index then
         local message =
-            table.concat({'>> Map difficulty has changed to ', this.difficulties[index].name, ' difficulty!'})
+            table.concat({'>> 地图难度已更改为 ', this.difficulties[index].name, ' 难度!'})
         game.print(message, this.difficulties[index].print_color)
         Server.to_discord_embed(message)
     end
@@ -305,7 +305,7 @@ local function on_gui_click(event)
 
     if this.difficulty_player_votes[player.name] and this.difficulty_player_votes[player.name].index == i then
         player.print(
-            'You have already voted for ' .. this.difficulties[i].name .. '.',
+            '你已经投票给了 ' .. this.difficulties[i].name .. '.',
             this.difficulties[i].print_color
         )
         return event.element.parent.destroy()
@@ -326,7 +326,7 @@ local function on_gui_click(event)
     Public.difficulty_gui()
     event.element.parent.destroy()
     game.print(
-        player.name .. ' has voted for ' .. this.difficulties[i].name .. ' difficulty!',
+        player.name .. ' 已投票给 ' .. this.difficulties[i].name .. ' 难度!',
         this.difficulties[i].print_color
     )
 end

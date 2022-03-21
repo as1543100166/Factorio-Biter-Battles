@@ -137,12 +137,12 @@ local function poll_difficulty(player)
     if game.tick > this.difficulty_poll_closing_timeout then
         if player.online_time ~= 0 then
             local t = math.abs(math.floor((this.difficulty_poll_closing_timeout - game.tick) / 3600))
-            local str = 'Votes have closed ' .. t
-            str = str .. ' minute'
+            local str = '投票已经结束 ' .. t
+            str = str .. ' 分钟'
             if t > 1 then
                 str = str .. 's'
             end
-            str = str .. ' ago.'
+            str = str .. ' 之前.'
             player.print(str)
         end
         return
@@ -151,7 +151,7 @@ local function poll_difficulty(player)
     local frame =
         player.gui.center.add {
         type = 'frame',
-        caption = 'Vote difficulty:',
+        caption = '投票难度:',
         name = 'difficulty_poll',
         direction = 'vertical'
     }
@@ -171,7 +171,7 @@ local function poll_difficulty(player)
         {
             type = 'button',
             name = 'close',
-            caption = 'Close (' .. math.floor((this.difficulty_poll_closing_timeout - game.tick) / 3600) .. ' minutes left)'
+            caption = '关闭 (' .. math.floor((this.difficulty_poll_closing_timeout - game.tick) / 3600) .. ' 分钟之前)'
         }
     )
     b.style.font_color = {r = 0.66, g = 0.0, b = 0.66}
@@ -192,7 +192,7 @@ local function set_difficulty()
     a = a / vote_count
     local new_index = math.round(a, 0)
     if this.difficulty_vote_index ~= new_index then
-        local message = table.concat({'>> Map difficulty has changed to ', this.difficulties[new_index].name, ' difficulty!'})
+        local message = table.concat({'>> 地图难度已改为 ', this.difficulties[new_index].name, ' 难度!'})
         game.print(message, this.difficulties[new_index].print_color)
         Server.to_discord_embed(message)
     end
@@ -289,7 +289,7 @@ local function on_gui_click(event)
         return
     end
     local i = tonumber(event.element.name)
-    game.print(player.name .. ' has voted for ' .. this.difficulties[i].name .. ' difficulty!', this.difficulties[i].print_color)
+    game.print(player.name .. ' 已投票给 ' .. this.difficulties[i].name .. ' 难度!', this.difficulties[i].print_color)
     this.difficulty_player_votes[player.name] = i
     set_difficulty()
     Public.difficulty_gui()

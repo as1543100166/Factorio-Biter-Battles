@@ -10,7 +10,7 @@ local difficulties = Tables.difficulties
 local function difficulty_gui(player)
 	local value = math.floor(global.difficulty_vote_value*100)
 	if player.gui.top["difficulty_gui"] then player.gui.top["difficulty_gui"].destroy() end
-	local str = table.concat({"Global map difficulty is ", difficulties[global.difficulty_vote_index].name, ". Mutagen has ", value, "% effectiveness."})
+	local str = table.concat({"全球地图难度为 ", difficulties[global.difficulty_vote_index].name, ". 变异有 ", value, "% 效果."})
 	local b = player.gui.top.add { type = "sprite-button", caption = difficulties[global.difficulty_vote_index].name, tooltip = str, name = "difficulty_gui" }
 	b.style.font = "heading-2"
 	b.style.font_color = difficulties[global.difficulty_vote_index].print_color
@@ -34,16 +34,16 @@ local function poll_difficulty(player)
 	if tick > global.difficulty_votes_timeout then
 		if player.online_time ~= 0 then
 			local t = math.abs(math.floor((global.difficulty_votes_timeout - tick) / 3600))
-			local str = "Votes have closed " .. t
-			str = str .. " minute"
+			local str = "投票已经结束 " .. t
+			str = str .. " 分钟"
 			if t > 1 then str = str .. "s" end
-			str = str .. " ago."
+			str = str .. " 之前."
 			player.print(str)
 		end
 		return 
 	end
 	
-	local frame = player.gui.center.add { type = "frame", caption = "Vote global difficulty:", name = "difficulty_poll", direction = "vertical" }
+	local frame = player.gui.center.add { type = "frame", caption = "投票决定全球难度:", name = "difficulty_poll", direction = "vertical" }
 	for key, _ in pairs(difficulties) do
 		local b = frame.add({type = "button", name = tostring(key), caption = difficulties[key].name .. " (" .. difficulties[key].str .. ")"})
 		b.style.font_color = difficulties[key].color
@@ -51,7 +51,7 @@ local function poll_difficulty(player)
 		b.style.minimal_width = 180
 	end
 	local b = frame.add({type = "label", caption = "- - - - - - - - - - - - - - - - - - - -"})
-	local b = frame.add({type = "button", name = "close", caption = "Close (" .. math.floor((global.difficulty_votes_timeout - tick) / 3600) .. " minutes left)"})
+	local b = frame.add({type = "button", name = "close", caption = "关闭 (" .. math.floor((global.difficulty_votes_timeout - tick) / 3600) .. " 分钟之前)"})
 	b.style.font_color = {r=0.66, g=0.0, b=0.66}
 	b.style.font = "heading-3"
 	b.style.minimal_width = 96
@@ -72,7 +72,7 @@ local function set_difficulty()
 	table.sort(a)
 	local new_index = a[v]
 	if global.difficulty_vote_index ~= new_index then
-		local message = table.concat({">> Map difficulty has changed to ", difficulties[new_index].name, " difficulty!"})
+		local message = table.concat({">> 地图难度已改为 ", difficulties[new_index].name, " 难度!"})
 		game.print(message, difficulties[new_index].print_color)
 		Server.to_discord_embed(message)
 	end
@@ -125,7 +125,7 @@ local function on_gui_click(event)
 	
 	if global.bb_settings.only_admins_vote or global.tournament_mode then
 		if player.admin then
-			game.print(player.name .. " has voted for " .. difficulties[i].name .. " difficulty!", difficulties[i].print_color)
+			game.print(player.name .. " 已投票给 " .. difficulties[i].name .. " 难度!", difficulties[i].print_color)
 			global.difficulty_player_votes[player.name] = i
 			set_difficulty()
 			difficulty_gui(player)
@@ -135,21 +135,21 @@ local function on_gui_click(event)
 	end
 
     if player.spectator then
-        player.print("spectators can't vote for difficulty")
+        player.print("旁观者不能投票选择难度")
 		event.element.parent.destroy()
         return
     end
 
 	if game.tick - global.spectator_rejoin_delay[player.name] < 3600 then
         player.print(
-            "Not ready to vote. Please wait " .. 60-(math.floor((game.tick - global.spectator_rejoin_delay[player.name])/60)) .. " seconds.",
+            "未准备好投票。请等待 " .. 60-(math.floor((game.tick - global.spectator_rejoin_delay[player.name])/60)) .. " seconds.",
             {r = 0.98, g = 0.66, b = 0.22}
         )
 		event.element.parent.destroy()
         return
     end
 	
-	game.print(player.name .. " has voted for " .. difficulties[i].name .. " difficulty!", difficulties[i].print_color)
+	game.print(player.name .. " 已投票给 " .. difficulties[i].name .. " 难度!", difficulties[i].print_color)
 	global.difficulty_player_votes[player.name] = i
 	set_difficulty()
 	difficulty_gui_all()

@@ -44,14 +44,14 @@ local threat_values = {
 local function get_target_entity(force_name)
 	local force_index = game.forces[force_name].index
 	local target_entity = Functions.get_random_target_entity(force_index)
-	if not target_entity then print("Unable to get target entity for " .. force_name .. ".") return end
+	if not target_entity then print("无法获得目标实体 " .. force_name .. ".") return end
 	for _ = 1, 2, 1 do
 		local e = Functions.get_random_target_entity(force_index)
 		if math_abs(e.position.x) < math_abs(target_entity.position.x) then
 			target_entity = e
 		end
 	end
-	if not target_entity then print("Unable to get target entity for " .. force_name .. ".") return end
+	if not target_entity then print("无法获得目标实体 " .. force_name .. ".") return end
 	--print("Target entity for " .. force_name .. ": " .. target_entity.name .. " at x=" .. target_entity.position.x .. " y=" .. target_entity.position.y)
 	return target_entity
 end
@@ -70,23 +70,23 @@ end
 
 local function is_biter_inactive(biter, unit_number, biter_force_name)
 	if not biter.entity then
-		if global.bb_debug then print("BiterBattles: active unit " .. unit_number .. " removed, possibly died.") end
+		if global.bb_debug then print("虫子大作战: 活动单位 " .. unit_number .. " 删除，可能已死亡.") end
 		return true
 	end
 	if not biter.entity.valid then
-		if global.bb_debug then print("BiterBattles: active unit " .. unit_number .. " removed, biter invalid.") end
+		if global.bb_debug then print("虫子大作战: 活动单位 " .. unit_number .. " 删除，虫子无效.") end
 		return true
 	end
 	if not biter.entity.unit_group then
-		if global.bb_debug then print("BiterBattles: active unit " .. unit_number .. "  at x" .. biter.entity.position.x .. " y" .. biter.entity.position.y .. " removed, had no unit group.") end
+		if global.bb_debug then print("虫子大作战: 活动单位 " .. unit_number .. "  at x" .. biter.entity.position.x .. " y" .. biter.entity.position.y .. " removed, had no unit group.") end
 		return true
 	end
 	if not biter.entity.unit_group.valid then
-		if global.bb_debug then print("BiterBattles: active unit " .. unit_number .. " removed, unit group invalid.") end
+		if global.bb_debug then print("虫子大作战: 活动单位 " .. unit_number .. " 删除，单元组无效。") end
 		return true
 	end
 	if game.tick - biter.active_since > bb_config.biter_timeout then
-		if global.bb_debug then print("BiterBattles: " .. biter_force_name .. " unit " .. unit_number .. " timed out at tick age " .. game.tick - biter.active_since .. ".") end
+		if global.bb_debug then print("虫子大作战: " .. biter_force_name .. " 单位 " .. unit_number .. " 选择超时 " .. game.tick - biter.active_since .. ".") end
 		biter.entity.destroy()
 		return true
 	end
@@ -179,12 +179,12 @@ local function select_units_around_spawner(spawner, force_name, side_target)
 		valid_biters[i] = biter
 		--Announce New Spawn
 		if(global.biter_spawn_unseen[force_name][unit_name]) then
-			game.print("A " .. unit_name:gsub("-", " ") .. " was spotted far away on team " .. force_name .. "...")
+			game.print("A " .. unit_name:gsub("-", " ") .. " 被发现在远处的团队 " .. force_name .. "...")
 			global.biter_spawn_unseen[force_name][unit_name] = false
 		end
 	end
 
-	if global.bb_debug then game.print(get_active_biter_count(biter_force_name) .. " active units for " .. biter_force_name) end
+	if global.bb_debug then game.print(get_active_biter_count(biter_force_name) .. " 积极参与的单位为 " .. biter_force_name) end
 
 	return valid_biters
 end
@@ -196,7 +196,7 @@ local function send_group(unit_group, force_name, side_target)
 	else
 		target = get_target_entity(force_name)
 	end
-	if not target then print("No target for " .. force_name .. " biters.") return end
+	if not target then print("没有目标 " .. force_name .. " 虫子.") return end
 
 	target = target.position
 
@@ -247,7 +247,7 @@ local function get_unit_group_position(spawner)
 	end
 	p = spawner.surface.find_non_colliding_position("electric-furnace", p, 256, 1)
 	if not p then
-		if global.bb_debug then game.print("No unit_group_position found for team " .. spawner.force.name) end
+		if global.bb_debug then game.print("没有发现团队的单元组位置 " .. spawner.force.name) end
 		return
 	end
 	return p
@@ -280,13 +280,13 @@ local function create_attack_group(surface, force_name, biter_force_name)
 
 	local side_target = get_target_entity(force_name)
 	if not side_target then
-		print("No side target found for " .. force_name .. ".")
+		print("未发现侧面目标的 " .. force_name .. ".")
 		return
 	end
 
 	local spawner = get_nearby_biter_nest(side_target)
 	if not spawner then
-		print("No spawner found for " .. force_name .. ".")
+		print("没有找到生成器的 " .. force_name .. ".")
 		return
 	end
 
@@ -310,7 +310,7 @@ Public.pre_main_attack = function()
 		local biter_force_name = force_name .. "_biters"
 		global.main_attack_wave_amount = math.ceil(get_threat_ratio(biter_force_name) * 7)
 
-		if global.bb_debug then game.print(global.main_attack_wave_amount .. " unit groups designated for " .. force_name .. " biters.") end
+		if global.bb_debug then game.print(global.main_attack_wave_amount .. " 指定的单位群体为 " .. force_name .. " 虫子.") end
 	else
 		global.main_attack_wave_amount = 0
 	end

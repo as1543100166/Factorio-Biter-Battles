@@ -16,13 +16,13 @@ local math_random = math.random
 require "maps.biter_battles_v2.spec_spy"
 require 'utils/gui_styles'
 local gui_values = {
-		["north"] = {force = "north", biter_force = "north_biters", c1 = bb_config.north_side_team_name, c2 = "JOIN ", n1 = "join_north_button",
-		t1 = "Evolution of north side biters.",
-		t2 = "Threat causes biters to attack. Reduces when biters are slain.", color1 = {r = 0.55, g = 0.55, b = 0.99}, color2 = {r = 0.66, g = 0.66, b = 0.99},
+		["北方"] = {force = "north", biter_force = "north_biters", c1 = bb_config.north_side_team_name, c2 = "加入 ", n1 = "join_north_button",
+		t1 = "北方虫子威胁值.",
+		t2 = "威胁会导致虫群攻击。当虫子被杀时减少.", color1 = {r = 0.55, g = 0.55, b = 0.99}, color2 = {r = 0.66, g = 0.66, b = 0.99},
 		tech_spy = "spy-north-tech", prod_spy = "spy-north-prod"},
-		["south"] = {force = "south", biter_force = "south_biters", c1 = bb_config.south_side_team_name, c2 = "JOIN ", n1 = "join_south_button",
-		t1 = "Evolution of south side biters.",
-		t2 = "Threat causes biters to attack. Reduces when biters are slain.", color1 = {r = 0.99, g = 0.33, b = 0.33}, color2 = {r = 0.99, g = 0.44, b = 0.44},
+		["南方"] = {force = "south", biter_force = "south_biters", c1 = bb_config.south_side_team_name, c2 = "加入 ", n1 = "join_south_button",
+		t1 = "南方虫子威胁值.",
+		t2 = "威胁会导致虫群攻击。当虫子被杀时减少.", color1 = {r = 0.99, g = 0.33, b = 0.33}, color2 = {r = 0.99, g = 0.44, b = 0.44},
 		tech_spy = "spy-south-tech", prod_spy = "spy-south-prod"}
 	}
 
@@ -49,7 +49,7 @@ local function clock(frame)
 	local total_hours = math.floor(total_minutes / 60)
 	local minutes = total_minutes - (total_hours * 60)
 
-	local clock = frame.add {type = "label", caption = "Game time: " .. string.format("%02d", total_hours) .. ":" .. string.format("%02d", minutes)}
+	local clock = frame.add {type = "label", caption = "游戏时间: " .. string.format("%02d", total_hours) .. ":" .. string.format("%02d", minutes)}
 	clock.style.font = "default-bold"
 	clock.style.font_color = {r = 0.98, g = 0.66, b = 0.22}
 	frame.add {type = "line"}
@@ -59,14 +59,14 @@ local function create_first_join_gui(player)
 	if not global.game_lobby_timeout then global.game_lobby_timeout = 5999940 end
 	if global.game_lobby_timeout - game.tick < 0 then global.game_lobby_active = false end
 	local frame = player.gui.left.add { type = "frame", name = "bb_main_gui", direction = "vertical" }
-	local b = frame.add{ type = "label", caption = "Defend your Rocket Silo!" }
+	local b = frame.add{ type = "label", caption = "保卫你的火箭发射井!" }
 	b.style.font = "heading-1"
 	b.style.font_color = {r=0.98, g=0.66, b=0.22}
-	local b = frame.add  { type = "label", caption = "Feed the enemy team's biters to gain advantage!" }
+	local b = frame.add  { type = "label", caption = "喂养敌方队伍的虫子以获得优势!" }
 	b.style.font = "heading-2"
 	b.style.font_color = {r=0.98, g=0.66, b=0.22}
 	clock(frame)
-	local d = frame.add{type = "sprite-button", name = "join_random_button", caption = "AUTO JOIN"}
+	local d = frame.add{type = "sprite-button", name = "join_random_button", caption = "自动分配团队"}
 	d.style.font = "default-large-bold"
 	d.style.font_color = { r=1, g=0, b=1}
 	d.style.width = 350
@@ -83,14 +83,14 @@ local function create_first_join_gui(player)
 		l.style.single_line = false
 		l.style.maximal_width = 290
 		local l = t.add  { type = "label", caption = "  -  "}
-		local l = t.add  { type = "label", caption = #game.forces[gui_value.force].connected_players .. " Players "}
+		local l = t.add  { type = "label", caption = #game.forces[gui_value.force].connected_players .. " 玩家 "}
 		l.style.font_color = { r=0.22, g=0.88, b=0.22}
 
 		local c = gui_value.c2
 		local font_color =  gui_value.color1
 		if global.game_lobby_active then
 			font_color = {r=0.7, g=0.7, b=0.7}
-			c = c .. " (waiting for players...  "
+			c = c .. " (等待玩家...  "
 			c = c .. math.ceil((global.game_lobby_timeout - game.tick)/60)
 			c = c .. ")"
 		end
@@ -186,7 +186,7 @@ function Public.create_main_gui(player)
 
 		-- Number of players
 		local l = t.add  { type = "label", caption = " - "}
-		local c = #game.forces[gui_value.force].connected_players .. " Player"
+		local c = #game.forces[gui_value.force].connected_players .. " 玩家"
 		if #game.forces[gui_value.force].connected_players ~= 1 then c = c .. "s" end
 		local l = t.add  { type = "label", caption = c}
 		l.style.font = "default"
@@ -211,10 +211,10 @@ function Public.create_main_gui(player)
 		local t = frame.add { type = "table", name = "stats_" .. gui_value.force, column_count = 5 }
 
 		-- Evolution
-		local l = t.add  { type = "label", caption = "Evo:"}
+		local l = t.add  { type = "label", caption = "进化因子:"}
 		--l.style.minimal_width = 25
 		local biter_force = game.forces[gui_value.biter_force]
-		local tooltip = gui_value.t1 .. "\nDamage: " .. (biter_force.get_ammo_damage_modifier("melee") + 1) * 100 .. "%\nRevive: " .. global.reanim_chance[biter_force.index] .. "%"
+		local tooltip = gui_value.t1 .. "\n伤害: " .. (biter_force.get_ammo_damage_modifier("melee") + 1) * 100 .. "%\n复活: " .. global.reanim_chance[biter_force.index] .. "%"
 		
 		l.tooltip = tooltip		
 		
@@ -226,7 +226,7 @@ function Public.create_main_gui(player)
 		l.tooltip = tooltip
 
 		-- Threat
-		local l = t.add  {type = "label", caption = "Threat: "}
+		local l = t.add  {type = "label", caption = "威胁度: "}
 		l.style.minimal_width = 25
 		l.tooltip = gui_value.t2
 		local l = t.add  {type = "label", name = "threat_" .. gui_value.force, caption = math.floor(global.bb_threat[gui_value.biter_force])}
@@ -244,16 +244,16 @@ function Public.create_main_gui(player)
 
 	-- Spectate / Rejoin team
 	if is_spec then
-		local b = t.add  { type = "sprite-button", name = "bb_leave_spectate", caption = "Join Team" }
+		local b = t.add  { type = "sprite-button", name = "bb_leave_spectate", caption = "加入团队" }
 	else
-		local b = t.add  { type = "sprite-button", name = "bb_spectate", caption = "Spectate" }
+		local b = t.add  { type = "sprite-button", name = "bb_spectate", caption = "观看" }
 	end
 
 	-- Playerlist button
 	if global.bb_view_players[player.name] == true then
-		local b = t.add  { type = "sprite-button", name = "bb_hide_players", caption = "Playerlist" }
+		local b = t.add  { type = "sprite-button", name = "bb_hide_players", caption = "玩家列表" }
 	else
-		local b = t.add  { type = "sprite-button", name = "bb_view_players", caption = "Playerlist" }
+		local b = t.add  { type = "sprite-button", name = "bb_view_players", caption = "玩家列表" }
 	end
 
 
@@ -296,7 +296,7 @@ end
 function join_team(player, force_name, forced_join, auto_join)
 	if not player.character then return end
 	if not forced_join then
-		if global.tournament_mode then player.print("The game is set to tournament mode. Teams can only be changed via team manager.", {r = 0.98, g = 0.66, b = 0.22}) return end
+		if global.tournament_mode then player.print("游戏被设置为比赛模式. 队员只能通过队长改变.", {r = 0.98, g = 0.66, b = 0.22}) return end
 	end
 	if not force_name then return end
 	local surface = player.surface
@@ -307,7 +307,7 @@ function join_team(player, force_name, forced_join, auto_join)
 		if not forced_join then
 			if #game.forces[force_name].connected_players > #game.forces[enemy_team].connected_players then
 				if not global.chosen_team[player.name] then
-					player.print("Team " .. force_name .. " has too many players currently.", {r = 0.98, g = 0.66, b = 0.22})
+					player.print("队伍 " .. force_name .. " 目前有太多的玩家.", {r = 0.98, g = 0.66, b = 0.22})
 					return
 				end
 			end
@@ -318,7 +318,7 @@ function join_team(player, force_name, forced_join, auto_join)
 		if not forced_join then
 			if game.tick - global.spectator_rejoin_delay[player.name] < 3600 then
 				player.print(
-					"Not ready to return to your team yet. Please wait " .. 60-(math.floor((game.tick - global.spectator_rejoin_delay[player.name])/60)) .. " seconds.",
+					"还没有准备好返回你的团队.请等待 " .. 60-(math.floor((game.tick - global.spectator_rejoin_delay[player.name])/60)) .. " seconds.",
 					{r = 0.98, g = 0.66, b = 0.22}
 				)
 				return
@@ -326,7 +326,7 @@ function join_team(player, force_name, forced_join, auto_join)
 		end
 		local p = surface.find_non_colliding_position("character", game.forces[force_name].get_spawn_position(surface), 16, 0.5)
 		if not p then
-			game.print("No spawn position found for " .. player.name .. "!", {255, 0, 0})
+			game.print("未发现出生位置 " .. player.name .. "!", {255, 0, 0})
 			return 
 		end
 		player.teleport(p, surface)
@@ -334,7 +334,7 @@ function join_team(player, force_name, forced_join, auto_join)
 		player.character.destructible = true
 		Public.refresh()
 		game.permissions.get_group("Default").add_player(player)
-		local msg = table.concat({"Team ", player.force.name, " player ", player.name, " is no longer spectating."})
+		local msg = table.concat({"队伍 ", player.force.name, " 玩家 ", player.name, " 不再是旁观者了."})
 		game.print(msg, {r = 0.98, g = 0.66, b = 0.22})
 		Server.to_discord_bold(msg)
 		global.spectator_rejoin_delay[player.name] = game.tick
@@ -350,9 +350,9 @@ function join_team(player, force_name, forced_join, auto_join)
 	if not forced_join then
 		local c = player.force.name
 		if global.tm_custom_name[player.force.name] then c = global.tm_custom_name[player.force.name] end
-		local message = table.concat({player.name, " has joined team ", c, "! "})
+		local message = table.concat({player.name, " 已经加入了 ", c, "团队! "})
 		Server.to_discord_bold(message)
-		if auto_join then message = table.concat({player.name, " was automatically assigned to team ", c, "!"}) end
+		if auto_join then message = table.concat({player.name, " 自动分配到 ", c, "团队中!"}) end
 		game.print(message, {r = 0.98, g = 0.66, b = 0.22})
 	end
 	local i = player.get_inventory(defines.inventory.character_main)
@@ -374,13 +374,13 @@ end
 function spectate(player, forced_join)
 	if not player.character then return end
 	if not forced_join then
-		if global.tournament_mode then player.print("The game is set to tournament mode. Teams can only be changed via team manager.", {r = 0.98, g = 0.66, b = 0.22}) return end
+		if global.tournament_mode then player.print("游戏被设置为比赛模式. 队员只能通过队长改变.", {r = 0.98, g = 0.66, b = 0.22}) return end
 	end
 	player.teleport(player.surface.find_non_colliding_position("character", {0,0}, 4, 1))
 	player.force = game.forces.spectator
 	player.character.destructible = false
 	if not forced_join then
-		local msg = player.name .. " is spectating."
+		local msg = player.name .. " 正在观看."
 		game.print(msg, {r = 0.98, g = 0.66, b = 0.22})
 		Server.to_discord_bold(msg)
 	end
@@ -396,11 +396,11 @@ local function join_gui_click(name, player, auto_join)
 	if global.game_lobby_active then
 		if player.admin then
 			join_team(player, name, false,  auto_join)
-			game.print("Lobby disabled, admin override.", { r=0.98, g=0.66, b=0.22})
+			game.print("大厅关闭,管理员覆盖.", { r=0.98, g=0.66, b=0.22})
 			global.game_lobby_active = false
 			return
 		end
-		player.print("Waiting for more players, " .. wait_messages[math_random(1, #wait_messages)], { r=0.98, g=0.66, b=0.22})
+		player.print("等待更多玩家, " .. wait_messages[math_random(1, #wait_messages)], { r=0.98, g=0.66, b=0.22})
 		return
 	end
 	join_team(player, name, false, auto_join)
@@ -479,7 +479,7 @@ local function on_gui_click(event)
 		if player.position.y ^ 2 + player.position.x ^ 2 < 12000 then
 			spectate(player)
 		else
-			player.print("You are too far away from spawn to spectate.",{ r=0.98, g=0.66, b=0.22})
+			player.print("你距离出生点太远了，无法观察.",{ r=0.98, g=0.66, b=0.22})
 		end
 		return
 	end

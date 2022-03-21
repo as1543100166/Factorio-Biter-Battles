@@ -113,14 +113,14 @@ local functions = {
                 true
             )
             game.permissions.get_group('Default').set_allows_action(defines.input_action.import_blueprint_string, true)
-            get_actor(event, '{Blueprints}', 'has enabled blueprints!')
+            get_actor(event, '{Blueprints}', '已启用蓝图!')
         else
             game.permissions.get_group('Default').set_allows_action(
                 defines.input_action.open_blueprint_library_gui,
                 false
             )
             game.permissions.get_group('Default').set_allows_action(defines.input_action.import_blueprint_string, false)
-            get_actor(event, '{Blueprints}', 'has disabled blueprints!')
+            get_actor(event, '{Blueprints}', '已禁用蓝图!')
         end
     end,
     ['comfy_panel_spaghett_toggle'] = function(event)
@@ -136,10 +136,10 @@ local functions = {
 	["bb_team_balancing_toggle"] = function(event) 
 		if event.element.switch_state == "left" then
 			global.bb_settings.team_balancing = true
-			game.print("Team balancing has been enabled!")
+			game.print("团队平衡已启用!")
 		else
 			global.bb_settings.team_balancing = false
-			game.print("Team balancing has been disabled!")
+			game.print("团队平衡已被禁用!")
 		end
 	end,
 	
@@ -147,10 +147,10 @@ local functions = {
 		if event.element.switch_state == "left" then
 			global.bb_settings.only_admins_vote = true
 			global.difficulty_player_votes = {}
-			game.print("Admin-only difficulty voting has been enabled!")
+			game.print("仅限管理员的难度投票已被启用!")
 		else
 			global.bb_settings.only_admins_vote = false
-			game.print("Admin-only difficulty voting has been disabled!")
+			game.print("仅限管理员的难度投票已被禁用!!")
 		end
 	end,
 }
@@ -181,10 +181,10 @@ local antigrief_functions = {
         local AG = Antigrief.get()
         if event.element.switch_state == 'left' then
             AG.enabled = true
-            get_actor(event, '{Antigrief}', 'has enabled the antigrief function.', true)
+            get_actor(event, '{Antigrief}', '保护插件已开启.', true)
         else
             AG.enabled = false
-            get_actor(event, '{Antigrief}', 'has disabled the antigrief function.', true)
+            get_actor(event, '{Antigrief}', '保护插件已关闭.', true)
         end
         trust_connected_players()
     end
@@ -398,8 +398,8 @@ local build_config_gui = (function(player, frame)
             scroll_pane,
             switch_state,
             'comfy_panel_blueprint_toggle',
-            'Blueprint Library',
-            'Toggles the usage of blueprint strings and the library.'
+            '蓝图库',
+            '切换蓝图字符串和库的用法'
         )
 
         scroll_pane.add({type = 'line'})
@@ -412,8 +412,8 @@ local build_config_gui = (function(player, frame)
             scroll_pane,
             switch_state,
             'comfy_panel_spaghett_toggle',
-            'Spaghett Mode',
-            'Disables the Logistic System research.\nRequester, buffer or active-provider containers can not be built.'
+            '物流系统',
+            '禁用物流系统研究\n不能建立机器人物流的三个箱子.'
         )
 
         if package.loaded['comfy_panel.poll'] then
@@ -426,8 +426,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_poll_trusted_toggle',
-                'Poll mode',
-                'Disables non-trusted plebs to create polls.'
+                '投票模式',
+                '禁止不受信任的人创建投票.'
             )
         end
 
@@ -450,8 +450,8 @@ local build_config_gui = (function(player, frame)
             scroll_pane,
             switch_state,
             'comfy_panel_disable_antigrief',
-            'Antigrief',
-            'Left = Enables antigrief / Right = Disables antigrief'
+            '地形保护插件',
+            'Left = 开启 地形保护插件 / Right = 关闭 地形保护插件'
         )
         scroll_pane.add({type = 'line'})
 		
@@ -631,7 +631,7 @@ local function on_init()
     global.comfy_panel_disable_antigrief = false
 end
 
-comfy_panel_tabs['Config'] = {gui = build_config_gui, admin = false}
+comfy_panel_tabs['配置'] = {gui = build_config_gui, admin = false}
 
 local Event = require 'utils.event'
 Event.on_init(on_init)

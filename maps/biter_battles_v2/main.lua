@@ -270,25 +270,25 @@ local function clear_corpses(cmd)
             return
         end
         if param == nil then
-            player.print('[ERROR] Must specify radius!', Color.fail)
+            player.print('[ERROR] 必须指定半径!', Color.fail)
             return
         end
         if not trusted[player.name] and not player.admin and param > 100 then
-				player.print('[ERROR] Value is too big. Max radius is 100', Color.fail)
+				player.print('[ERROR]值过大. 最大 100', Color.fail)
 				return
         end
         if param < 0 then
-            player.print('[ERROR] Value is too low.', Color.fail)
+            player.print('[ERROR]值太低.', Color.fail)
             return
         end
         if param > 500 then
-            player.print('[ERROR] Value is too big.', Color.fail)
+            player.print('[ERROR]值过大.', Color.fail)
             return
         end
 
 	if not Ai.empty_reanim_scheduler() then
-		player.print("[ERROR] Some corpses are waiting to be reanimated...")
-		player.print(" => Try again in short moment")
+		player.print("[错误]一些尸体正在等待被复活...")
+		player.print(" => 在短时间内再试一次")
 		return
 	end
 

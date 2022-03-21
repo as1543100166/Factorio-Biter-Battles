@@ -75,9 +75,9 @@ local function print_feeding_msg(player, food, flask_amount)
 			target_team_text = "your own"
 		end
 		if flask_amount == 1 then
-			player.print("You fed one flask of " .. formatted_food .. " to " .. target_team_text .. " team's biters.", {r = 0.98, g = 0.66, b = 0.22})
+			player.print("你喂了一瓶 " .. formatted_food .. " to " .. target_team_text .. " 团队的虫子.", {r = 0.98, g = 0.66, b = 0.22})
 		else
-			player.print("You fed " .. formatted_amount .. " flasks of " .. formatted_food .. " to " .. target_team_text .. " team's biters.", {r = 0.98, g = 0.66, b = 0.22})
+			player.print("你喂了 " .. formatted_amount .. " flasks of " .. formatted_food .. " to " .. target_team_text .. " 团队的虫子", {r = 0.98, g = 0.66, b = 0.22})
 		end				
 	end	
 end
@@ -207,7 +207,7 @@ end
 
 local function feed_biters(player, food)	
 		if game.ticks_played < global.difficulty_votes_timeout then
-		player.print("Please wait for voting to finish before feeding")
+		player.print("请等待投票结束后再喂食")
 		return
 	end
 
@@ -219,7 +219,7 @@ local function feed_biters(player, food)
 	local i = player.get_main_inventory()
 	local flask_amount = i.get_item_count(food)
 	if flask_amount == 0 then
-		player.print("You have no " .. food_values[food].name .. " flask in your inventory.", {r = 0.98, g = 0.66, b = 0.22})
+		player.print("你没有 " .. food_values[food].name .. " 在库存在.", {r = 0.98, g = 0.66, b = 0.22})
 		return
 	end
 	

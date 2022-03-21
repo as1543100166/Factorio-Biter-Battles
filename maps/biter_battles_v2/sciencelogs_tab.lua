@@ -227,4 +227,4 @@ end
 
 event.add(defines.events.on_gui_selection_state_changed, on_gui_selection_state_changed)
 
-comfy_panel_tabs["MutagenLog"] = {gui = build_config_gui, admin = false}
+comfy_panel_tabs["突变记录"] = {gui = build_config_gui, admin = false}

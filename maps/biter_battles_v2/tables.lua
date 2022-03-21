@@ -41,18 +41,18 @@ Public.food_values = {
 
 Public.gui_foods = {}
 for k, v in pairs(Public.food_values) do
-	Public.gui_foods[k] = math.floor(v.value * 10000) .. " Mutagen strength"
+	Public.gui_foods[k] = math.floor(v.value * 10000) .. " 进化因子"
 end
-Public.gui_foods["raw-fish"] = "Send a fish to spy for 45 seconds.\nLeft Mouse Button: Send one fish.\nRMB: Sends 5 fish.\nShift+LMB: Send all fish.\nShift+RMB: Send half of all fish."
+Public.gui_foods["raw-fish"] = "派一条鱼去侦察45秒。\n鼠标左键：发送一条鱼。\n右键：发送5条鱼。\nShift+左键：发送所有鱼。\nShift+右键：发送一半的鱼。"
 
 Public.force_translation = {
-	["south_biters"] = "south",
-	["north_biters"] = "north"
+	["south_biters"] = "南方",
+	["north_biters"] = "北方"
 }
 
 Public.enemy_team_of = {
-	["north"] = "south",
-	["south"] = "north"
+	["north"] = "南方",
+	["south"] = "北方"
 }
 
 Public.wait_messages = {
@@ -138,17 +138,17 @@ Public.spawn_ore = {
 
 Public.difficulties = {
 	
-	[1] = {name = "I'm Too Young to Die", str = "25%", value = 0.25, color = {r=0.00, g=0.45, b=0.00}, print_color = {r=0.00, g=0.9, b=0.00}},
-	[2] = {name = "Piece of Cake", str = "50%", value = 0.5, color = {r=0.00, g=0.35, b=0.00}, print_color = {r=0.00, g=0.7, b=0.00}},
-	[3] = {name = "Easy", str = "75%", value = 0.75, color = {r=0.00, g=0.25, b=0.00}, print_color = {r=0.00, g=0.5, b=0.00}},
-	[4] = {name = "Normal", str = "100%", value = 1, color = {r=0.00, g=0.00, b=0.25}, print_color = {r=0.0, g=0.0, b=0.7}},
-	[5] = {name = "Hard", str = "150%", value = 1.5, color = {r=0.25, g=0.00, b=0.00}, print_color = {r=0.5, g=0.0, b=0.00}},
-	[6] = {name = "Nightmare", str = "300%", value = 3, color = {r=0.35, g=0.00, b=0.00}, print_color = {r=0.7, g=0.0, b=0.00}},
-	[7] = {name = "Fun and Fast", str = "500%", value = 5, color = {r=0.55, g=0.00, b=0.00}, print_color = {r=0.9, g=0.0, b=0.00}}
+	[1] = {name = "菜鸟", str = "25%", value = 0.25, color = {r=0.00, g=0.45, b=0.00}, print_color = {r=0.00, g=0.9, b=0.00}},
+	[2] = {name = "小菜一碟", str = "50%", value = 0.5, color = {r=0.00, g=0.35, b=0.00}, print_color = {r=0.00, g=0.7, b=0.00}},
+	[3] = {name = "简单", str = "75%", value = 0.75, color = {r=0.00, g=0.25, b=0.00}, print_color = {r=0.00, g=0.5, b=0.00}},
+	[4] = {name = "正常", str = "100%", value = 1, color = {r=0.00, g=0.00, b=0.25}, print_color = {r=0.0, g=0.0, b=0.7}},
+	[5] = {name = "困难", str = "150%", value = 1.5, color = {r=0.25, g=0.00, b=0.00}, print_color = {r=0.5, g=0.0, b=0.00}},
+	[6] = {name = "噩梦", str = "300%", value = 3, color = {r=0.35, g=0.00, b=0.00}, print_color = {r=0.7, g=0.0, b=0.00}},
+	[7] = {name = "轻松有趣", str = "500%", value = 5, color = {r=0.55, g=0.00, b=0.00}, print_color = {r=0.9, g=0.0, b=0.00}}
 }
 
-Public.forces_list = { "all teams", "north", "south" }
-Public.science_list = { "all science", "very high tier (space, utility, production)", "high tier (space, utility, production, chemical)", "mid+ tier (space, utility, production, chemical, military)","space","utility","production","chemical","military", "logistic", "automation" }
+Public.forces_list = { "所有团队", "北方", "南方" }
+Public.science_list = { "所有科技", "非常高级（空间、效用、生产）", "高级（空间、公用事业、生产、化学）", "mid+ tier (space, utility, production, chemical, military)","space","utility","production","chemical","military", "logistic", "automation" }
 Public.evofilter_list = { "all evo jump", "no 0 evo jump", "10+ only","5+ only","4+ only","3+ only","2+ only","1+ only" }
 Public.food_value_table_version = { Public.food_values["automation-science-pack"].value, Public.food_values["logistic-science-pack"].value, Public.food_values["military-science-pack"].value, Public.food_values["chemical-science-pack"].value, Public.food_values["production-science-pack"].value, Public.food_values["utility-science-pack"].value, Public.food_values["space-science-pack"].value}
 

@@ -277,7 +277,7 @@ local function on_gui_click(event)
     if not frame then
         return
     end
-    if frame.name ~= 'Scoreboard' then
+    if frame.name ~= '记分牌' then
         return
     end
 
@@ -462,7 +462,7 @@ local function on_built_entity(event)
     score.built_entities = 1 + (score.built_entities or 0)
 end
 
-comfy_panel_tabs['Scoreboard'] = {gui = show_score, admin = false}
+comfy_panel_tabs['记分牌'] = {gui = show_score, admin = false}
 
 Event.add(defines.events.on_player_mined_entity, on_player_mined_entity)
 Event.add(defines.events.on_player_died, on_player_died)

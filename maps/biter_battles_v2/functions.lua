@@ -292,7 +292,7 @@ function Public.no_turret_creep(event)
 	surface.create_entity({
 		name = "flying-text",
 		position = entity.position,
-		text = "Turret too close to spawner!",
+		text = "炮塔离出生点太近!",
 		color = {r=0.98, g=0.66, b=0.22}
 	})
 	
@@ -305,7 +305,7 @@ function Public.no_landfill_by_untrusted_user(event)
 	local player = game.players[event.player_index]
 	local trusted = Session.get_trusted_table()
 	if not trusted[player.name] then
-		player.print('You have not grown accustomed to this technology yet.', {r = 0.22, g = 0.99, b = 0.99})
+		player.print('你还没有研究这种技术.', {r = 0.22, g = 0.99, b = 0.99})
 		entity.destroy()
 		return
 	end
@@ -363,7 +363,7 @@ function Public.spy_fish(player, event)
 	local owned_fish = i2.get_item_count("raw-fish")
 	local send_amount = 1
 	if owned_fish == 0 then
-		player.print("You have no fish in your inventory.",{ r=0.98, g=0.66, b=0.22})
+		player.print("你的库存中没有鱼.",{ r=0.98, g=0.66, b=0.22})
 	else
 		if shift then
 			if button == defines.mouse_button_type.left then
@@ -391,12 +391,12 @@ function Public.spy_fish(player, event)
 				if spy_time_seconds > 120 then
 					minute_label = " minutes and "
 				end
-				player.print(math_floor(spy_time_seconds / 60) .. minute_label .. math_floor(spy_time_seconds % 60) .. " seconds of enemy vision left.", { r=0.98, g=0.66, b=0.22})
+				player.print(math_floor(spy_time_seconds / 60) .. minute_label .. math_floor(spy_time_seconds % 60) .. " 还剩几秒敌人的视野.", { r=0.98, g=0.66, b=0.22})
 			else
-				player.print(spy_time_seconds .. " seconds of enemy vision left.", { r=0.98, g=0.66, b=0.22})
+				player.print(spy_time_seconds .. " 还剩几秒敌人的视野.", { r=0.98, g=0.66, b=0.22})
 			end
 		else
-			game.print(player.name .. " sent " .. send_amount .. " fish to spy on " .. enemy_team .. " team!", {r=0.98, g=0.66, b=0.22})
+			game.print(player.name .. " 派遣 " .. send_amount .. " 监视的鱼 " .. enemy_team .. " 队伍!", {r=0.98, g=0.66, b=0.22})
 			global.spy_fish_timeout[player.force.name] = game.tick + duration_per_unit * send_amount
 		end		
 	end

@@ -81,7 +81,7 @@ commands.add_command(
 
         if player and player.valid then
             if not player.admin then
-                player.print("You're not admin!", {r = 1, g = 0.5, b = 0.1})
+                player.print("你不是管理员!", {r = 1, g = 0.5, b = 0.1})
                 return
             end
 
@@ -91,14 +91,14 @@ commands.add_command(
             local target_player = game.players[cmd.parameter]
             if target_player then
                 if trusted[target_player.name] then
-                    game.print(target_player.name .. ' is already trusted!')
+                    game.print(target_player.name .. ' 已被信任!')
                     return
                 end
                 trusted[target_player.name] = true
-                game.print(target_player.name .. ' is now a trusted player.', {r = 0.22, g = 0.99, b = 0.99})
+                game.print(target_player.name .. ' 现在是一个值得信赖的玩家.', {r = 0.22, g = 0.99, b = 0.99})
                 for _, a in pairs(game.connected_players) do
                     if a.admin and a.name ~= player.name then
-                        a.print('[ADMIN]: ' .. player.name .. ' trusted ' .. target_player.name, {r = 1, g = 0.5, b = 0.1})
+                        a.print('[ADMIN]: ' .. player.name .. ' 信任 ' .. target_player.name, {r = 1, g = 0.5, b = 0.1})
                     end
                 end
             end
@@ -109,11 +109,11 @@ commands.add_command(
             local target_player = game.players[cmd.parameter]
             if target_player then
                 if trusted[target_player.name] == true then
-                    game.print(target_player.name .. ' is already trusted!')
+                    game.print(target_player.name .. ' 已被信任!')
                     return
                 end
                 trusted[target_player.name] = true
-                game.print(target_player.name .. ' is now a trusted player.', {r = 0.22, g = 0.99, b = 0.99})
+                game.print(target_player.name .. ' 现在是一个值得信赖的玩家.', {r = 0.22, g = 0.99, b = 0.99})
             end
         end
     end
@@ -131,7 +131,7 @@ commands.add_command(
             if player ~= nil then
                 p = player.print
                 if not player.admin then
-                    p("You're not admin!", {r = 1, g = 0.5, b = 0.1})
+                    p("你不是管理员!", {r = 1, g = 0.5, b = 0.1})
                     return
                 end
             else
@@ -144,14 +144,14 @@ commands.add_command(
             local target_player = game.players[cmd.parameter]
             if target_player then
                 if trusted[target_player.name] == false then
-                    game.print(target_player.name .. ' is already untrusted!')
+                    game.print(target_player.name .. ' 已经是不被信任的了!')
                     return
                 end
                 trusted[target_player.name] = false
-                game.print(target_player.name .. ' is now untrusted.', {r = 0.22, g = 0.99, b = 0.99})
+                game.print(target_player.name .. ' 现在是不被信任的.', {r = 0.22, g = 0.99, b = 0.99})
                 for _, a in pairs(game.connected_players) do
                     if a.admin == true and a.name ~= player.name then
-                        a.print('[ADMIN]: ' .. player.name .. ' untrusted ' .. target_player.name, {r = 1, g = 0.5, b = 0.1})
+                        a.print('[ADMIN]: ' .. player.name .. ' 不受信任的 ' .. target_player.name, {r = 1, g = 0.5, b = 0.1})
                     end
                 end
             end
@@ -162,11 +162,11 @@ commands.add_command(
             local target_player = game.players[cmd.parameter]
             if target_player then
                 if trusted[target_player.name] == false then
-                    game.print(target_player.name .. ' is already untrusted!')
+                    game.print(target_player.name .. ' 已经是不被信任的了!')
                     return
                 end
                 trusted[target_player.name] = false
-                game.print(target_player.name .. ' is now untrusted.', {r = 0.22, g = 0.99, b = 0.99})
+                game.print(target_player.name .. ' 现在是不被信任的.', {r = 0.22, g = 0.99, b = 0.99})
             end
         end
     end
@@ -218,7 +218,7 @@ local function on_console_command(event)
 
     local server_time = Server.get_current_time()
     if server_time then
-        server_time = format(' (Server time: %s)', Timestamp.to_string(server_time))
+        server_time = format(' (服务器时间: %s)', Timestamp.to_string(server_time))
     else
         server_time = ' at tick: ' .. game.tick
     end

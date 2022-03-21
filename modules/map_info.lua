@@ -112,7 +112,7 @@ local function on_gui_click(event)
     end
 end
 
-comfy_panel_tabs['Map Info'] = {gui = create_map_intro, admin = false}
+comfy_panel_tabs['地图信息'] = {gui = create_map_intro, admin = false}
 
 local event = require 'utils.event'
 event.add(defines.events.on_player_joined_game, on_player_joined_game)

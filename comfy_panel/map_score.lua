@@ -86,7 +86,7 @@ local function on_init()
 	}
 end
 
-comfy_panel_tabs["Map Scores"] = {gui = score_list, admin = false}
+comfy_panel_tabs["地图分数"] = {gui = score_list, admin = false}
 
 local event = require 'utils.event'
 event.on_init(on_init)

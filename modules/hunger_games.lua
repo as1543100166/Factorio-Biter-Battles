@@ -341,18 +341,18 @@ local function on_gui_click(event)
 		if p.name == "groups_table" then			
 			if event.element.type == "button" and event.element.caption == "Join" then
 				if global.spam_protection[tostring(player.name)] > game.tick then
-					player.print("Please wait " .. math.ceil((global.spam_protection[tostring(player.name)] - game.tick)/60) .. " seconds before sending another request.", message_color)
+					player.print("请等待 " .. math.ceil((global.spam_protection[tostring(player.name)] - game.tick)/60) .. " 秒后再发送另一个请求.", message_color)
 					return 
 				end	
 				destroy_request_guis(player)			
-				player.print("A request to join the group has been sent.", message_color) 
+				player.print("已发出加入小队的请求.", message_color) 
 				request_alliance(event.element.parent.name, player)			
 			end			
 
 			if event.element.type == "button" and event.element.caption == "Leave" then
 				destroy_request_guis(player)
 				global.alliance_groups[event.element.parent.name].members[tostring(player.name)] = nil
-				game.print(tostring(player.name) .. ' has left group "' .. event.element.parent.name .. '"', message_color)
+				game.print(tostring(player.name) .. ' 已离开小队 "' .. event.element.parent.name .. '"', message_color)
 				refresh_alliances()									
 				return
 			end			

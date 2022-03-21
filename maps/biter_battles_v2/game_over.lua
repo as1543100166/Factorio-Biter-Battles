@@ -10,8 +10,8 @@ local math_random = math.random
 local Public = {}
 
 local gui_values = {
-    ["north"] = {c1 = "Team North", color1 = {r = 0.55, g = 0.55, b = 0.99}},
-    ["south"] = {c1 = "Team South", color1 = {r = 0.99, g = 0.33, b = 0.33}}
+    ["north"] = {c1 = "北队", color1 = {r = 0.55, g = 0.55, b = 0.99}},
+    ["south"] = {c1 = "南队", color1 = {r = 0.99, g = 0.33, b = 0.33}}
 }
 
 local function shuffle(tbl)
@@ -41,7 +41,7 @@ local function create_victory_gui(player)
         type = "frame",
         name = "bb_victory_gui",
         direction = "vertical",
-        caption = c .. " won!"
+        caption = c .. " 赢了!"
     }
     frame.style.font = "heading-1"
     frame.style.font_color = values.color1
@@ -157,7 +157,7 @@ local function show_mvps(player)
         name = "mvps",
         direction = "vertical"
     })
-    local l = frame.add({type = "label", caption = "MVPs - North:"})
+    local l = frame.add({type = "label", caption = "MVPs - 北方:"})
     l.style.font = "default-listbox"
     l.style.font_color = {r = 0.55, g = 0.55, b = 0.99}
 
@@ -165,35 +165,35 @@ local function show_mvps(player)
     local mvp = get_mvps("north")
     if mvp then
 
-        local l = t.add({type = "label", caption = "Defender >> "})
+        local l = t.add({type = "label", caption = "捍卫者 >> "})
         l.style.font = "default-listbox"
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.killscore.name .. " with a score of " ..
+            caption = mvp.killscore.name .. " 分数为 " ..
                 mvp.killscore.score
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
 
-        local l = t.add({type = "label", caption = "Builder >> "})
+        local l = t.add({type = "label", caption = "建造大师 >> "})
         l.style.font = "default-listbox"
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.built_entities.name .. " built " ..
-                mvp.built_entities.score .. " things"
+            caption = mvp.built_entities.name .. " 建造了 " ..
+                mvp.built_entities.score .. " 单位"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
 
-        local l = t.add({type = "label", caption = "Deaths >> "})
+        local l = t.add({type = "label", caption = "死亡人数 >> "})
         l.style.font = "default-listbox"
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.deaths.name .. " died " .. mvp.deaths.score ..
-                " times"
+            caption = mvp.deaths.name .. " 死了 " .. mvp.deaths.score ..
+                " 时间"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
@@ -201,14 +201,14 @@ local function show_mvps(player)
         if not global.results_sent_north then
             local result = {}
             table.insert(result, 'NORTH: \\n')
-            table.insert(result, 'MVP Defender: \\n')
-            table.insert(result, mvp.killscore.name .. " with a score of " ..
+            table.insert(result, 'MVP 捍卫者: \\n')
+            table.insert(result, mvp.killscore.name .. " 分数为 " ..
                              mvp.killscore.score .. "\\n")
             table.insert(result, '\\n')
-            table.insert(result, 'MVP Builder: \\n')
+            table.insert(result, 'MVP 建造大师: \\n')
             table.insert(result,
-                         mvp.built_entities.name .. " built " ..
-                             mvp.built_entities.score .. " things\\n")
+                         mvp.built_entities.name .. " 建造了 " ..
+                             mvp.built_entities.score .. " 单位\\n")
             table.insert(result, '\\n')
             table.insert(result, 'MVP Deaths: \\n')
             table.insert(result,
@@ -227,24 +227,24 @@ local function show_mvps(player)
     local t = frame.add({type = "table", column_count = 2})
     local mvp = get_mvps("south")
     if mvp then
-        local l = t.add({type = "label", caption = "Defender >> "})
+        local l = t.add({type = "label", caption = "捍卫者 >> "})
         l.style.font = "default-listbox"
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.killscore.name .. " with a score of " ..
+            caption = mvp.killscore.name .. " 分数为 " ..
                 mvp.killscore.score
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
 
-        local l = t.add({type = "label", caption = "Builder >> "})
+        local l = t.add({type = "label", caption = "建造大师 >> "})
         l.style.font = "default-listbox"
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.built_entities.name .. " built " ..
-                mvp.built_entities.score .. " things"
+            caption = mvp.built_entities.name .. " 建造了 " ..
+                mvp.built_entities.score .. " 单位"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
@@ -263,14 +263,14 @@ local function show_mvps(player)
         if not global.results_sent_south then
             local result = {}
             table.insert(result, 'SOUTH: \\n')
-            table.insert(result, 'MVP Defender: \\n')
-            table.insert(result, mvp.killscore.name .. " with a score of " ..
+            table.insert(result, 'MVP 捍卫者: \\n')
+            table.insert(result, mvp.killscore.name .. " 分数为 " ..
                              mvp.killscore.score .. "\\n")
             table.insert(result, '\\n')
-            table.insert(result, 'MVP Builder: \\n')
+            table.insert(result, 'MVP 建造大师: \\n')
             table.insert(result,
-                         mvp.built_entities.name .. " built " ..
-                             mvp.built_entities.score .. " things\\n")
+                         mvp.built_entities.name .. " 建造了 " ..
+                             mvp.built_entities.score .. " 单位\\n")
             table.insert(result, '\\n')
             table.insert(result, 'MVP Deaths: \\n')
             table.insert(result,
@@ -293,7 +293,7 @@ function Public.server_restart()
         if global.restart then
             if not global.announced_message then
                 local message =
-                    'Soft-reset is disabled! Server will restart from scenario to load new changes.'
+                    '软复位功能被禁用! 服务器将从场景中重新启动以加载新的变化'
                 game.print(message, {r = 0.22, g = 0.88, b = 0.22})
                 Server.to_discord_bold(table.concat {'*** ', message, ' ***'})
                 Server.start_scenario('Biter_Battles')
@@ -304,7 +304,7 @@ function Public.server_restart()
         if global.shutdown then
             if not global.announced_message then
                 local message =
-                    'Soft-reset is disabled! Server will shutdown. Most likely because of updates.'
+                    '软复位功能被禁用! 服务器将关闭。很可能是因为更新.'
                 game.print(message, {r = 0.22, g = 0.88, b = 0.22})
                 Server.to_discord_bold(table.concat {'*** ', message, ' ***'})
                 Server.stop_scenario()
@@ -312,8 +312,8 @@ function Public.server_restart()
                 return
             end
         end
-        game.print("Map is restarting!", {r = 0.22, g = 0.88, b = 0.22})
-        local message = 'Map is restarting! '
+        game.print("地图正在重启!", {r = 0.22, g = 0.88, b = 0.22})
+        local message = '地图正在重启! '
         Server.to_discord_bold(table.concat {'*** ', message, ' ***'})
 
         local prev_surface = global.bb_surface_name
@@ -339,10 +339,10 @@ function Public.server_restart()
         return
     end
     if global.server_restart_timer % 30 == 0 then
-        game.print("Map will restart in " .. global.server_restart_timer ..
-                       " seconds!", {r = 0.22, g = 0.88, b = 0.22})
+        game.print("地图将在以下时间后重新启动 " .. global.server_restart_timer ..
+                       " 秒!", {r = 0.22, g = 0.88, b = 0.22})
         if global.server_restart_timer / 30 == 1 then
-            game.print("Good luck with your next match!", {r=0.98, g=0.66, b=0.22})
+            game.print("祝你在下一场比赛中好运!", {r=0.98, g=0.66, b=0.22})
         end
     end
 end
@@ -383,7 +383,7 @@ local function biter_killed_the_silo(event)
 		return (cause.valid and cause.type == 'unit')
 	end
 
-	log("Could not determine what destroyed the silo")
+	log("无法确定是什么摧毁了发射井")
 	return false
 end
 
@@ -458,10 +458,10 @@ function Public.silo_death(event)
 
 		discord_message = "*** Team " .. global.bb_game_won_by_team .. " has won! ***" .. "\\n" ..
 							global.victory_time .. "\\n\\n" .. 
-							"North Evo: " .. north_evo .. "%\\n" ..
-                            "North Threat: " .. north_threat .. "\\n\\n" ..
-                            "South Evo: " .. south_evo .. "%\\n" ..
-                            "South Threat: " .. south_threat .. "\\n\\n" ..
+							"北方 科技值: " .. north_evo .. "%\\n" ..
+                            "北方 威胁值: " .. north_threat .. "\\n\\n" ..
+                            "南方 科技值: " .. south_evo .. "%\\n" ..
+                            "南方 威胁值: " .. south_threat .. "\\n\\n" ..
                             north_players .. "\\n\\n" .. south_players
 
         Server.to_discord_embed(discord_message)

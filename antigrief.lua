@@ -192,7 +192,7 @@ local function on_marked_for_deconstruction(event)
     end
     if playtime < this.required_playtime then
         event.entity.cancel_deconstruction(game.get_player(event.player_index).force.name)
-        player.print('You have not grown accustomed to this technology yet.', {r = 0.22, g = 0.99, b = 0.99})
+        player.print('你还没有研发这种技术.', {r = 0.22, g = 0.99, b = 0.99})
     end
 end
 

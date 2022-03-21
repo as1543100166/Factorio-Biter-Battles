@@ -109,18 +109,18 @@ local build_group_gui = (function(player, frame)
 
             local tt = t.add({type = 'table', name = group.name, column_count = 1})
             if group.name ~= this.player_group[player.name] then
-                local b = tt.add({type = 'button', caption = 'Join'})
+                local b = tt.add({type = 'button', caption = '加入'})
                 b.style.font = 'default-bold'
                 b.style.minimal_width = actions_width
                 b.style.maximal_width = actions_width
             else
-                local b = tt.add({type = 'button', caption = 'Leave'})
+                local b = tt.add({type = 'button', caption = '离开'})
                 b.style.font = 'default-bold'
                 b.style.minimal_width = actions_width
                 b.style.maximal_width = actions_width
             end
             if player.admin == true or group.founder == player.name then
-                local b = tt.add({type = 'button', caption = 'Delete'})
+                local b = tt.add({type = 'button', caption = '解散'})
                 b.style.font = 'default-bold'
                 b.style.minimal_width = actions_width
                 b.style.maximal_width = actions_width
@@ -134,11 +134,11 @@ local build_group_gui = (function(player, frame)
 
     local frame2 = frame.add({type = 'frame', name = 'frame2'})
     local t = frame2.add({type = 'table', name = 'group_table', column_count = 3})
-    local textfield = t.add({type = 'textfield', name = 'new_group_name', text = 'Name'})
+    local textfield = t.add({type = 'textfield', name = 'new_group_name', text = '名字'})
     textfield.style.minimal_width = 200
-    local textfield = t.add({type = 'textfield', name = 'new_group_description', text = 'Description'})
+    local textfield = t.add({type = 'textfield', name = 'new_group_description', text = '描述'})
     textfield.style.minimal_width = 400
-    local b = t.add({type = 'button', name = 'create_new_group', caption = 'Create'})
+    local b = t.add({type = 'button', name = 'create_new_group', caption = '创建'})
     b.style.minimal_width = 150
     b.style.font = 'default-bold'
 end)
@@ -147,7 +147,7 @@ local function refresh_gui()
     for _, p in pairs(game.connected_players) do
         local frame = Tabs.comfy_panel_get_active_frame(p)
         if frame then
-            if frame.name == 'Groups' then
+            if frame.name == '小队' then
                 local new_group_name = frame.frame2.group_table.new_group_name.text
                 local new_group_description = frame.frame2.group_table.new_group_description.text
 
@@ -222,7 +222,7 @@ local function on_gui_click(event)
     if not frame then
         return
     end
-    if frame.name ~= 'Groups' then
+    if frame.name ~= '小队' then
         return
     end
 
@@ -263,7 +263,7 @@ local function on_gui_click(event)
                 b = player.color.b * 0.7 + 0.3,
                 a = 1
             }
-            game.print(player.name .. ' 已经成立了一个新的队伍!', color)
+            game.print(player.name .. ' 已经成立了一个新的小队!', color)
             game.print('>> ' .. new_group_name, {r = 0.98, g = 0.66, b = 0.22})
             game.print(new_group_description, {r = 0.85, g = 0.85, b = 0.85})
 
@@ -280,7 +280,7 @@ local function on_gui_click(event)
     end
     if p then
         if p.name == 'groups_table' then
-            if event.element.type == 'button' and event.element.caption == 'Join' then
+            if event.element.type == 'button' and event.element.caption == '加入' then
                 this.player_group[player.name] = event.element.parent.name
                 local str = '[' .. event.element.parent.name
                 str = str .. ']'
@@ -292,14 +292,14 @@ local function on_gui_click(event)
                         b = player.color.b * 0.7 + 0.3,
                         a = 1
                     }
-                    game.print(player.name .. ' 已加入队伍 "' .. event.element.parent.name .. '"', color)
+                    game.print(player.name .. ' 加入了小队 "' .. event.element.parent.name .. '"', color)
                     this.join_spam_protection[player.name] = game.tick
                 end
                 refresh_gui()
                 return
             end
 
-            if event.element.type == 'button' and event.element.caption == 'Delete' then
+            if event.element.type == 'button' and event.element.caption == '解散' then
                 for _, p in pairs(game.players) do
                     if this.player_group[p.name] then
                         if this.player_group[p.name] == event.element.parent.name then
@@ -308,13 +308,13 @@ local function on_gui_click(event)
                         end
                     end
                 end
-                game.print(player.name .. ' 删除队伍 "' .. event.element.parent.name .. '"')
+                game.print(player.name .. ' 解散 小队 "' .. event.element.parent.name .. '"')
                 this.tag_groups[event.element.parent.name] = nil
                 refresh_gui()
                 return
             end
 
-            if event.element.type == 'button' and event.element.caption == 'Leave' then
+            if event.element.type == 'button' and event.element.caption == '离开' then
                 this.player_group[player.name] = '[Group]'
                 player.tag = ''
                 refresh_gui()
@@ -338,7 +338,7 @@ function Public.reset_groups()
     this.tag_groups = {}
 end
 
-comfy_panel_tabs['Groups'] = {gui = build_group_gui, admin = false}
+comfy_panel_tabs['小队'] = {gui = build_group_gui, admin = false}
 
 local event = require 'utils.event'
 event.add(defines.events.on_gui_click, on_gui_click)

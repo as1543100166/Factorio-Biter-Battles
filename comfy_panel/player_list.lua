@@ -199,12 +199,12 @@ local function get_formatted_playtime(x)
         m = tostring(m)
 
         if h == '0' then
-            local str = m .. ' minutes'
+            local str = m .. ' 分钟'
             return str
         else
-            local str = h .. ' hours '
+            local str = h .. ' 小时 '
             str = str .. m
-            str = str .. ' minutes'
+            str = str .. ' 分钟'
             return str
         end
     else
@@ -227,12 +227,12 @@ local function get_formatted_playtime(x)
         m = tostring(m)
 
         if h == '0' then
-            local str = m .. ' days'
+            local str = m .. ' 天'
             return str
         else
-            local str = h .. ' days '
+            local str = h .. ' 天 '
             str = str .. m
-            str = str .. ' hours'
+            str = str .. ' 小时'
             return str
         end
     end
@@ -406,13 +406,13 @@ local function player_list_show(player, frame, sort_by)
     local headers = {
         [1] = '[color=0.1,0.7,0.1]' .. -- green
             tostring(#game.connected_players) .. '[/color]',
-        [2] = 'Online' ..
+        [2] = '在线' ..
             ' / ' ..
                 '[color=0.7,0.1,0.1]' .. -- red
-                    tostring(#game.players - #game.connected_players) .. '[/color]' .. ' Offline',
-        [3] = 'Total Time',
-        [4] = 'Current Time',
-        [5] = 'Poke'
+                    tostring(#game.players - #game.connected_players) .. '[/color]' .. ' 离线',
+        [3] = '总时间',
+        [4] = '当前时间',
+        [5] = '戳他'
     }
     local header_modifier = {
         ['name_asc'] = function(h)
@@ -567,7 +567,7 @@ local function player_list_show(player, frame, sort_by)
         local button =
             flow.add {type = 'button', name = 'poke_player_' .. player_list[i].name, caption = player_list[i].pokes}
         button.style.font = 'default'
-        button.tooltip = 'Poke ' .. player_list[i].name .. ' with a random message!'
+        button.tooltip = '用随机信息 戳 ' .. player_list[i].name .. ' !'
         label.style.font_color = {r = 0.83, g = 0.83, b = 0.83}
         button.style.minimal_height = 30
         button.style.minimal_width = 30
@@ -599,7 +599,7 @@ local function on_gui_click(event)
     if not frame then
         return
     end
-    if frame.name ~= 'Players' then
+    if frame.name ~= '玩家' then
         return
     end
 
@@ -661,9 +661,9 @@ local function on_gui_click(event)
         if this.player_list.last_poke_tick[event.element.player_index] + 300 < game.tick then
             local str = '>> '
             str = str .. player.name
-            str = str .. ' has poked '
+            str = str .. ' 戳到了 '
             str = str .. poked_player
-            str = str .. ' with '
+            str = str .. ' 和 '
             local z = math.random(1, #pokemessages)
             str = str .. pokemessages[z]
             str = str .. ' <<'
@@ -679,7 +679,7 @@ local function refresh()
     for _, player in pairs(game.connected_players) do
         local frame = Tabs.comfy_panel_get_active_frame(player)
         if frame then
-            if frame.name ~= 'Players' then
+            if frame.name ~= '玩家' then
                 return
             end
             player_list_show(player, frame, this.player_list.sorting_method[player.index])
@@ -710,7 +710,7 @@ function Public.show_roles_in_list(value)
     return this.show_roles_in_list
 end
 
-comfy_panel_tabs['Players'] = {gui = player_list_show, admin = false}
+comfy_panel_tabs['玩家'] = {gui = player_list_show, admin = false}
 
 Event.add(defines.events.on_player_joined_game, on_player_joined_game)
 Event.add(defines.events.on_player_left_game, on_player_left_game)

@@ -336,7 +336,7 @@ local function text_changed(event)
     if not frame then
         return
     end
-    if frame.name ~= 'Admin' then
+    if frame.name ~= '管理菜单' then
         return
     end
 
@@ -638,7 +638,7 @@ local function on_gui_click(event)
         return
     end
 
-    if frame.name ~= 'Admin' then
+    if frame.name ~= '管理菜单' then
         return
     end
 
@@ -703,7 +703,7 @@ local function on_gui_selection_state_changed(event)
         if not frame then
             return
         end
-        if frame.name ~= 'Admin' then
+        if frame.name ~= '管理菜单' then
             return
         end
 
@@ -719,7 +719,7 @@ local function on_gui_selection_state_changed(event)
         if not frame then
             return
         end
-        if frame.name ~= 'Admin' then
+        if frame.name ~= '管理菜单' then
             return
         end
 
@@ -727,7 +727,7 @@ local function on_gui_selection_state_changed(event)
     end
 end
 
-comfy_panel_tabs['Admin'] = {gui = create_admin_panel, admin = true}
+comfy_panel_tabs['管理菜单'] = {gui = create_admin_panel, admin = true}
 
 commands.add_command("kill", "杀死一个玩家。使用方法: /kill <name>", function(cmd)
 	if not cmd.player_index then return end

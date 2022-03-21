@@ -27,5 +27,5 @@ local function force_map_reset(reason)
 end
 
 commands.add_command('force-map-reset',
-                     '通过杀死北面的筒仓来强制重置地图: /force-map-reset <原因> ',
+                     '通过杀死北面的发射井来强制重置地图: /force-map-reset <原因> ',
                      function(cmd) force_map_reset(cmd.parameter); end)

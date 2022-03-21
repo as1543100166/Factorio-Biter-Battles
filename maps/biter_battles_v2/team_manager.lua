@@ -81,8 +81,8 @@ local function switch_force(player_name, force_name)
 	local player = game.players[player_name]
 	player.force = game.forces[force_name]
 				
-	game.print(player_name .. " has been switched into team " .. force_name .. ".", {r=0.98, g=0.66, b=0.22})
-    Server.to_discord_bold(player_name .. " has joined team " .. force_name .. "!")
+	game.print(player_name .. " 已被换成团队 " .. force_name .. ".", {r=0.98, g=0.66, b=0.22})
+    Server.to_discord_bold(player_name .. " 已加入团队 " .. force_name .. "!")
 	
 	leave_corpse(player)
 	
@@ -96,7 +96,7 @@ end
 
 function Public.draw_top_toggle_button(player)
 	if player.gui.top["team_manager_toggle_button"] then player.gui.top["team_manager_toggle_button"].destroy() end	
-	local button = player.gui.top.add({type = "sprite-button", name = "team_manager_toggle_button", caption = "Team Manager", tooltip = tooltip})
+	local button = player.gui.top.add({type = "sprite-button", name = "team_manager_toggle_button", caption = "队伍管理", tooltip = tooltip})
 	button.style.font = "heading-2"
 	button.style.font_color = {r = 0.88, g = 0.55, b = 0.11}
 	element_style({element = button, x = 114, y = 38, pad = -2})
@@ -150,8 +150,8 @@ local function draw_manager_gui(player)
 	local button = t.add({
 			type = "button",
 			name = "team_manager_close",
-			caption = "Close",
-			tooltip = "Close this window."
+			caption = "关闭",
+			tooltip = "关闭窗口."
 		})
 	button.style.font = "heading-2"
 	
@@ -159,16 +159,16 @@ local function draw_manager_gui(player)
 		button = t.add({
 			type = "button",
 			name = "team_manager_activate_tournament",
-			caption = "Tournament Mode Enabled",
-			tooltip = "Only admins can move players and vote for difficulty.\nActive players can no longer go spectate.\nNew joining players are spectators."
+			caption = "比赛模式 开启",
+			tooltip = "只有管理员可以移动玩家和投票选择难度\n活跃的玩家不能再去观战\n新加入的玩家是旁观者."
 		})
 		button.style.font_color = {r = 222, g = 22, b = 22}
 	else
 		button = t.add({
 			type = "button",
 			name = "team_manager_activate_tournament",
-			caption = "Tournament Mode Disabled",
-			tooltip = "Only admins can move players. Active players can no longer go spectate. New joining players are spectators."
+			caption = "比赛模式 关闭",
+			tooltip = "只有管理员才能移动玩家\n活跃玩家不能再去观看\n新加入的玩家都是观众."
 		})
 		button.style.font_color = {r = 55, g = 55, b = 55}
 	end
@@ -178,16 +178,16 @@ local function draw_manager_gui(player)
 		button = t.add({
 			type = "button",
 			name = "team_manager_freeze_players",
-			caption = "Unfreeze Players",
-			tooltip = "Releases all players."
+			caption = "释放所有玩家",
+			tooltip = "释放所有玩家."
 		})
 		button.style.font_color = {r = 222, g = 22, b = 22}
 	else
 		button = t.add({
 			type = "button",
 			name = "team_manager_freeze_players",
-			caption = "Freeze Players",
-			tooltip = "Freezes all players, unable to perform actions, until released."
+			caption = "冻结所有玩家",
+			tooltip = "冻结所有玩家，无法执行行动，直到被释放。."
 		})
 		button.style.font_color = {r = 55, g = 55, b = 222}
 	end
@@ -197,16 +197,16 @@ local function draw_manager_gui(player)
 		button = t.add({
 			type = "button",
 			name = "team_manager_activate_training",
-			caption = "Training Mode Activated",
-			tooltip = "Feed your own team's biters and only teams with players gain threat & evo."
+			caption = "启动训练模式",
+			tooltip = "喂饱你自己团队的虫子，只有有团队的玩家才能获得威胁值和进化"
 		})
 		button.style.font_color = {r = 222, g = 22, b = 22}
 	else
 		button = t.add({
 			type = "button",
 			name = "team_manager_activate_training",
-			caption = "Training Mode Disabled",
-			tooltip = "Feed your own team's biters and only teams with players gain threat & evo."
+			caption = "关闭训练模式",
+			tooltip = "喂饱你自己团队的虫子，只有有团队的玩家才能获得威胁值和进化"
 		})
 		button.style.font_color = {r = 55, g = 55, b = 55}
 	end
@@ -221,7 +221,7 @@ end
 
 local function custom_team_name_gui(player, force_name)
 	if player.gui.center["custom_team_name_gui"] then player.gui.center["custom_team_name_gui"].destroy() return end	
-	local frame = player.gui.center.add({type = "frame", name = "custom_team_name_gui", caption = "Set custom team name:", direction = "vertical"})
+	local frame = player.gui.center.add({type = "frame", name = "custom_team_name_gui", caption = "设置自定义团队名称:", direction = "vertical"})
 	local text = force_name
 	if global.tm_custom_name[force_name] then text = global.tm_custom_name[force_name] end
 	
@@ -230,16 +230,16 @@ local function custom_team_name_gui(player, force_name)
 	local button = t.add({
 			type = "button",
 			name = "custom_team_name_gui_set",
-			caption = "Set",
-			tooltip = "Set custom team name."
+			caption = "设置",
+			tooltip = "设置自定义团队名称."
 		})
 	button.style.font = "heading-2"
 	
 	local button = t.add({
 			type = "button",
 			name = "custom_team_name_gui_close",
-			caption = "Close",
-			tooltip = "Close this window."
+			caption = "关闭",
+			tooltip = "关闭窗口"
 		})
 	button.style.font = "heading-2"
 end
@@ -249,7 +249,7 @@ local function team_manager_gui_click(event)
 	local name = event.element.name
 	
 	if game.forces[name] then
-		if not player.admin then player.print("Only admins can change team names.", {r = 175, g = 0, b = 0}) return end
+		if not player.admin then player.print("只有管理员可以更改团队名称.", {r = 175, g = 0, b = 0}) return end
 		custom_team_name_gui(player, name)
 		player.gui.center["team_manager_gui"].destroy()
 		return
@@ -261,49 +261,49 @@ local function team_manager_gui_click(event)
 	end
 	
 	if name == "team_manager_activate_tournament" then
-		if not player.admin then player.print("Only admins can switch tournament mode.", {r = 175, g = 0, b = 0}) return end
+		if not player.admin then player.print("只有管理员可以更改 比赛模式.", {r = 175, g = 0, b = 0}) return end
 		if global.tournament_mode then
 			global.tournament_mode = false
 			draw_manager_gui(player)
-			game.print(">>> Tournament Mode has been disabled.", {r = 111, g = 111, b = 111})
+			game.print(">>> 比赛模式 已经关闭.", {r = 111, g = 111, b = 111})
 			return
 		end
 		global.tournament_mode = true
 		draw_manager_gui(player)
-		game.print(">>> Tournament Mode has been enabled!", {r = 225, g = 0, b = 0})
+		game.print(">>> 比赛模式 已经开启!", {r = 225, g = 0, b = 0})
 		return
 	end
 	
 	if name == "team_manager_freeze_players" then
 		if global.freeze_players then
-			if not player.admin then player.print("Only admins can unfreeze players.", {r = 175, g = 0, b = 0}) return end
+			if not player.admin then player.print("只有管理员可以释放玩家.", {r = 175, g = 0, b = 0}) return end
 			global.freeze_players = false
 			draw_manager_gui(player)
-			game.print(">>> Players have been unfrozen!", {r = 255, g = 77, b = 77})
+			game.print(">>> 玩家已经释放了!", {r = 255, g = 77, b = 77})
 			unfreeze_players()
 			return
 		end
-		if not player.admin then player.print("Only admins can freeze players.", {r = 175, g = 0, b = 0}) return end
+		if not player.admin then player.print("只有管理员可以冻结玩家.", {r = 175, g = 0, b = 0}) return end
 		global.freeze_players = true
 		draw_manager_gui(player)
-		game.print(">>> Players have been frozen!", {r = 111, g = 111, b = 255})
+		game.print(">>> 玩家已经被冻结了!", {r = 111, g = 111, b = 255})
 		freeze_players()
 		return
 	end
 	
 	if name == "team_manager_activate_training" then
-		if not player.admin then player.print("Only admins can switch training mode.", {r = 175, g = 0, b = 0}) return end
+		if not player.admin then player.print("只有管理员可以切换训练模式.", {r = 175, g = 0, b = 0}) return end
 		if global.training_mode then
 			global.training_mode = false
 			global.game_lobby_active = true
 			draw_manager_gui(player)
-			game.print(">>> Training Mode has been disabled.", {r = 111, g = 111, b = 111})
+			game.print(">>> 训练模式已被禁用.", {r = 111, g = 111, b = 111})
 			return
 		end
 		global.training_mode = true
 		global.game_lobby_active = false
 		draw_manager_gui(player)
-		game.print(">>> Training Mode has been enabled!", {r = 225, g = 0, b = 0})
+		game.print(">>> 训练模式已被启用!", {r = 225, g = 0, b = 0})
 		return
 	end
 	
@@ -316,7 +316,7 @@ local function team_manager_gui_click(event)
 	
 	local listbox = player.gui.center["team_manager_gui"]["team_manager_root_table"]["team_manager_list_box_" .. tonumber(name)]
 	local selected_index = listbox.selected_index
-	if selected_index == 0 then player.print("No player selected.", {r = 175, g = 0, b = 0}) return end
+	if selected_index == 0 then player.print("没有选择玩家.", {r = 175, g = 0, b = 0}) return end
 	local player_name = listbox.items[selected_index]
 	
 	local m = -1

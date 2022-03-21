@@ -98,34 +98,34 @@ end
 local function do_remaining_time(poll, remaining_time_label)
     local end_tick = poll.end_tick
     if end_tick == -1 then
-        remaining_time_label.caption = 'Endless Poll.'
+        remaining_time_label.caption = '停止投票.'
         return true
     end
 
     local ticks = end_tick - game.tick
     if ticks < 0 then
-        remaining_time_label.caption = 'Poll Finished.'
+        remaining_time_label.caption = '投票结束.'
         polls.running = false
         return false
     else
         local time = math.ceil(ticks / 60)
-        remaining_time_label.caption = 'Remaining Time: ' .. time
+        remaining_time_label.caption = '剩余时间: ' .. time
         return true
     end
 end
 
 local function send_poll_result_to_discord(poll)
-    local result = {'Poll #', poll.id}
+    local result = {'投票 #', poll.id}
 
     local created_by_player = poll.created_by
     if created_by_player and created_by_player.valid then
-        insert(result, ' Created by ')
+        insert(result, ' 创建者 ')
         insert(result, created_by_player.name)
     end
 
     local edited_by_players = poll.edited_by
     if next(edited_by_players) then
-        insert(result, ' Edited by ')
+        insert(result, ' 编辑 ')
         for pi, _ in pairs(edited_by_players) do
             local p = game.players[pi]
             if p and p.valid then
@@ -196,17 +196,17 @@ local function redraw_poll_viewer_content(data)
     local created_by_player = poll.created_by
     local created_by_text
     if created_by_player and created_by_player.valid then
-        created_by_text = ' Created by ' .. created_by_player.name
+        created_by_text = ' 创建者 ' .. created_by_player.name
     else
         created_by_text = ''
     end
 
     local top_flow = poll_viewer_content.add {type = 'flow', direction = 'vertical'}
-    top_flow.add {type = 'label', caption = table.concat {'Poll #', poll.id, created_by_text}}
+    top_flow.add {type = 'label', caption = table.concat {'投票 #', poll.id, created_by_text}}
 
     local edited_by_players = poll.edited_by
     if next(edited_by_players) then
-        local edit_names = {'Edited by '}
+        local edit_names = {'编辑者 '}
         for pi, _ in pairs(edited_by_players) do
             local p = Game.get_player_by_index(pi)
             if p and p.valid then
@@ -232,7 +232,7 @@ local function redraw_poll_viewer_content(data)
             type = 'sprite-button',
             name = poll_view_edit_name,
             sprite = 'utility/rename_icon_normal',
-            tooltip = 'Edit Poll.'
+            tooltip = '编辑投票.'
         }
 
         local edit_button_style = edit_button.style
@@ -317,7 +317,7 @@ local function update_poll_viewer(data)
     data.poll_index = poll_index
 
     if poll_index == 0 then
-        poll_index_label.caption = 'No Polls'
+        poll_index_label.caption = '没有投票'
     else
         poll_index_label.caption = table.concat {'Poll ', poll_index, ' / ', #polls}
     end
@@ -330,7 +330,7 @@ end
 
 local function draw_main_frame(left, player)
     local trusted = session.get_trusted_table()
-    local frame = left.add {type = 'frame', name = main_frame_name, caption = 'Polls', direction = 'vertical'}
+    local frame = left.add {type = 'frame', name = main_frame_name, caption = '投票', direction = 'vertical'}
     --frame.style.maximal_width = 640
 
     local poll_viewer_top_flow = frame.add {type = 'table', column_count = 5}
@@ -389,7 +389,7 @@ local function draw_main_frame(left, player)
     left_flow.style.horizontal_align = 'left'
     left_flow.style.horizontally_stretchable = true
 
-    local close_button = left_flow.add {type = 'button', name = main_button_name, caption = 'Close'}
+    local close_button = left_flow.add {type = 'button', name = main_button_name, caption = '关闭'}
     apply_button_style(close_button)
 
     local right_flow = bottom_flow.add {type = 'flow'}
@@ -397,15 +397,15 @@ local function draw_main_frame(left, player)
 
     if (trusted[player.name] or player.admin) or global.comfy_panel_config.poll_trusted == false then
         local create_poll_button =
-            right_flow.add {type = 'button', name = create_poll_button_name, caption = 'Create Poll'}
+            right_flow.add {type = 'button', name = create_poll_button_name, caption = '创建投票'}
         apply_button_style(create_poll_button)
     else
         local create_poll_button =
             right_flow.add {
             type = 'button',
-            caption = 'Create Poll',
+            caption = '创建投票',
             enabled = false,
-            tooltip = '对不起，你需要被信任才能创建民意调查.'
+            tooltip = '对不起，你需要被信任才能创建投票.'
         }
         apply_button_style(create_poll_button)
     end
@@ -458,9 +458,9 @@ local function update_duration(slider)
     slider_data.data.duration = value * tick_duration_step
 
     if value == 0 then
-        label.caption = 'Endless Poll.'
+        label.caption = '停止 投票.'
     else
-        label.caption = value * duration_step .. ' seconds.'
+        label.caption = value * duration_step .. ' 秒.'
     end
 end
 
@@ -474,7 +474,7 @@ local function redraw_create_poll_content(data)
     grid.add {type = 'flow'}
     grid.add {
         type = 'label',
-        caption = 'Duration:',
+        caption = '持续时间:',
         tooltip = '专业提示：使用鼠标滚轮或方向键进行更精细的控制.'
     }
 
@@ -499,7 +499,7 @@ local function redraw_create_poll_content(data)
 
     grid.add {type = 'flow'}
     local question_label =
-        grid.add({type = 'flow'}).add {type = 'label', name = create_poll_label_name, caption = 'Question:'}
+        grid.add({type = 'flow'}).add {type = 'label', name = create_poll_label_name, caption = '问题:'}
 
     local question_textfield =
         grid.add({type = 'flow'}).add {type = 'textfield', name = create_poll_question_name, text = data.question}
@@ -533,7 +533,7 @@ local function redraw_create_poll_content(data)
             label_flow.add {
             type = 'label',
             name = create_poll_label_name,
-            caption = table.concat {'Answer #', count, ':'}
+            caption = table.concat {'回答 #', count, ':'}
         }
 
         local textfield_flow = grid.add {type = 'flow'}
@@ -578,12 +578,12 @@ local function draw_create_poll_frame(parent, player, previous_data)
     end
 
     if edit_mode then
-        title_text = 'Edit Poll #' .. previous_data.id
-        confirm_text = 'Edit Poll'
+        title_text = '编辑投票 #' .. previous_data.id
+        confirm_text = '编辑投票'
         confirm_name = create_poll_edit_name
     else
-        title_text = 'New Poll'
-        confirm_text = 'Create Poll'
+        title_text = '新的投票'
+        confirm_text = '创建投票'
         confirm_name = create_poll_confirm_name
     end
 
@@ -615,7 +615,7 @@ local function draw_create_poll_frame(parent, player, previous_data)
         scroll_pane.add {
         type = 'button',
         name = create_poll_add_answer_name,
-        caption = 'Add Answer'
+        caption = '添加答案'
     }
     apply_button_style(add_answer_button)
     Gui.set_data(add_answer_button, data)
@@ -626,11 +626,11 @@ local function draw_create_poll_frame(parent, player, previous_data)
     left_flow.style.horizontal_align = 'left'
     left_flow.style.horizontally_stretchable = true
 
-    local close_button = left_flow.add {type = 'button', name = create_poll_close_name, caption = 'Close'}
+    local close_button = left_flow.add {type = 'button', name = create_poll_close_name, caption = '关闭'}
     apply_button_style(close_button)
     Gui.set_data(close_button, frame)
 
-    local clear_button = left_flow.add {type = 'button', name = create_poll_clear_name, caption = 'Clear'}
+    local clear_button = left_flow.add {type = 'button', name = create_poll_clear_name, caption = '清除'}
     apply_button_style(clear_button)
     Gui.set_data(clear_button, data)
 
@@ -638,7 +638,7 @@ local function draw_create_poll_frame(parent, player, previous_data)
     right_flow.style.horizontal_align = 'right'
 
     if edit_mode then
-        local delete_button = right_flow.add {type = 'button', name = create_poll_delete_name, caption = 'Delete'}
+        local delete_button = right_flow.add {type = 'button', name = create_poll_delete_name, caption = '删除'}
         apply_button_style(delete_button)
         Gui.set_data(delete_button, data)
     end
@@ -683,7 +683,7 @@ local function create_poll(event)
     local question = data.question
 
     if not question:find('%S') then
-        event.player.print('Sorry, the poll needs a question.')
+        event.player.print('对不起，这个投票需要一个问题.')
         return
     end
 
@@ -697,7 +697,7 @@ local function create_poll(event)
     end
 
     if #answers < 1 then
-        player.print('Sorry, the poll needs at least one answer.')
+        player.print('对不起，这个投票至少需要一个答案.')
         return
     end
 
@@ -830,7 +830,7 @@ local function player_joined(event)
             type = 'sprite-button',
             name = main_button_name,
             sprite = 'item/programmable-speaker',
-            tooltip = '让大家听到你的问题!'
+            tooltip = '[投票系统]让大家看到你的投票!'
         }
         element_style({element = button, x = 38, y = 38, pad = -2})
         --[[
@@ -1025,7 +1025,7 @@ Gui.on_click(
             return
         end
 
-        local message = table.concat {player.name, ' has deleted Poll #', poll.id, ': ', poll.question}
+        local message = table.concat {player.name, ' 已删除 投票 #', poll.id, ': ', poll.question}
 
         for _, p in pairs(game.connected_players) do
             if not no_notify_players[p.index] then
@@ -1265,7 +1265,7 @@ function Class.validate(data)
     local duration_type = type(duration)
     if duration_type == 'number' then
         if duration < 0 then
-            return false, '持续时间不能为负数，将持续时间设置为0，以便进行无休止的轮询。.'
+            return false, '持续时间不能为负数，将持续时间设置为0，已设置无限时间。.'
         end
     elseif duration_type ~= 'nil' then
         return false, '持续时间必须是数字类型或零'
