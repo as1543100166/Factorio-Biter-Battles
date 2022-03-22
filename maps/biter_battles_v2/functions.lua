@@ -312,7 +312,10 @@ function Public.no_landfill_by_untrusted_user(event)
 end
 
 function Public.huoqvduiwu(player_force_name)
+<<<<<<< HEAD
+=======
 	-- 测试替换汉化 global.huoqvduiwu(player_force_name)
+>>>>>>> 8b5a755b35f72f123c3e0baf5655e4b5b3706ee7
 	if player_force_name == "north" then return "北方" end
 	if player_force_name == "south" then return "南方" end
 	if player_force_name == "spectator" then return "观察者" end
