@@ -65,7 +65,7 @@ function Public.show(player)
 	
 	frame.add {type = "line"}
 	
-	local l = frame.add {type = "label", caption = "Instructions:"}
+	local l = frame.add {type = "label", caption = "说明书:"}
 	l.style.font = "heading-1"
 	l.style.font_color = {r=0.85, g=0.85, b=0.85}
 	

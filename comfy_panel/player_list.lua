@@ -41,20 +41,20 @@ local symbol_asc = '▲'
 local symbol_desc = '▼'
 
 local pokemessages = {
-    'a stick',
-    'a leaf',
-    'a moldy carrot',
-    'a crispy slice of bacon',
-    'a french fry',
-    'a realistic toygun',
-    'a broomstick',
-    'a thirteen inch iron stick',
-    'a mechanical keyboard',
-    'a fly fishing cane',
-    'a selfie stick',
-    'an oversized fidget spinner',
-    'a thumb extender',
-    'a dirty straw',
+    '一根棍子',
+    '一片叶子',
+    '发霉的胡萝卜',
+    '一片酥脆的培根',
+    '炸薯条',
+    '一把逼真的玩具枪',
+    '一把扫帚',
+    '一根13英寸的铁棍',
+    '一个机械键盘',
+    '一根飞鱼手杖',
+    '自拍杆',
+    '一个超大的小玩意儿',
+    '一个拇指延长器',
+    '一根肮脏的吸管',
     'a green bean',
     'a banana',
     'an umbrella',
@@ -507,7 +507,7 @@ local function player_list_show(player, frame, sort_by)
             tooltip = '这名玩家值得信赖.\n左键单击以在地图上显示这个人。!'
         else
             trusted = '[color=yellow][U][/color]'
-            tooltip = '这名玩家不被信任.\n左键单击以在地图上显示这个人。!'
+            tooltip = '这名玩家未被信任.\n左键单击以在地图上显示这个人。!'
         end
 
         local caption

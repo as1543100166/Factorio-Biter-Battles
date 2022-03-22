@@ -193,7 +193,7 @@ local function show_mvps(player)
         local l = t.add({
             type = "label",
             caption = mvp.deaths.name .. " 死了 " .. mvp.deaths.score ..
-                " 时间"
+                " 次"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
@@ -212,8 +212,8 @@ local function show_mvps(player)
             table.insert(result, '\\n')
             table.insert(result, 'MVP Deaths: \\n')
             table.insert(result,
-                         mvp.deaths.name .. " died " .. mvp.deaths.score ..
-                             " times")
+                         mvp.deaths.name .. " 死了 " .. mvp.deaths.score ..
+                             " 次")
             local message = table.concat(result)
             Server.to_discord_embed(message)
             global.results_sent_north = true
@@ -254,8 +254,8 @@ local function show_mvps(player)
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.deaths.name .. " died " .. mvp.deaths.score ..
-                " times"
+            caption = mvp.deaths.name .. " 死了 " .. mvp.deaths.score ..
+                " 次"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
@@ -274,8 +274,8 @@ local function show_mvps(player)
             table.insert(result, '\\n')
             table.insert(result, 'MVP Deaths: \\n')
             table.insert(result,
-                         mvp.deaths.name .. " died " .. mvp.deaths.score ..
-                             " times")
+                         mvp.deaths.name .. " 死了 " .. mvp.deaths.score ..
+                             " 次")
             local message = table.concat(result)
             Server.to_discord_embed(message)
             global.results_sent_south = true

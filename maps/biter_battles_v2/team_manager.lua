@@ -197,7 +197,7 @@ local function draw_manager_gui(player)
 		button = t.add({
 			type = "button",
 			name = "team_manager_activate_training",
-			caption = "启动训练模式",
+			caption = "训练模式 启动",
 			tooltip = "喂饱你自己团队的虫子，只有有团队的玩家才能获得威胁值和进化"
 		})
 		button.style.font_color = {r = 222, g = 22, b = 22}
@@ -205,7 +205,7 @@ local function draw_manager_gui(player)
 		button = t.add({
 			type = "button",
 			name = "team_manager_activate_training",
-			caption = "关闭训练模式",
+			caption = "训练模式 关闭",
 			tooltip = "喂饱你自己团队的虫子，只有有团队的玩家才能获得威胁值和进化"
 		})
 		button.style.font_color = {r = 55, g = 55, b = 55}

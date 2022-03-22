@@ -159,10 +159,10 @@ local poll_function = {
     ['comfy_panel_poll_trusted_toggle'] = function(event)
         if event.element.switch_state == 'left' then
             global.comfy_panel_config.poll_trusted = true
-            get_actor(event, '{Poll Mode}', 'has disabled non-trusted people to do polls.')
+            get_actor(event, '{Poll Mode}', '使未被信任的人不能进行民意调查.')
         else
             global.comfy_panel_config.poll_trusted = false
-            get_actor(event, '{Poll Mode}', 'has allowed non-trusted people to do polls.')
+            get_actor(event, '{Poll Mode}', '允许未受信任的人做民意调查.')
         end
     end,
     ['comfy_panel_poll_no_notify_toggle'] = function(event)
@@ -236,14 +236,14 @@ local fortress_functions = {
             get_actor(
                 event,
                 '{Item Spill}',
-                'has enabled the ore spillage function. Ores now drop to surface when mining.'
+                '启用了矿石溢出功能。采矿时，矿石现在会掉到地面上.'
             )
         else
             this.spill_items_to_surface = false
             get_actor(
                 event,
                 '{Item Spill}',
-                'has disabled the item spillage function. Ores no longer drop to surface when mining.'
+                '已禁用物品溢出功能。采矿时矿石不再掉落到地面.'
             )
         end
     end,
@@ -340,8 +340,8 @@ local build_config_gui = (function(player, frame)
         scroll_pane,
         switch_state,
         'comfy_panel_spectator_switch',
-        'SpectatorMode',
-        'Toggles zoom-to-world view noise effect.\nEnvironmental sounds will be based on map view.'
+        '观察者模式',
+        '切换缩放世界观的噪音效果\n环境声音将基于地图视图'
     )
 
     scroll_pane.add({type = 'line'})
@@ -355,8 +355,8 @@ local build_config_gui = (function(player, frame)
             scroll_pane,
             switch_state,
             'comfy_panel_auto_hotbar_switch',
-            'AutoHotbar',
-            'Automatically fills your hotbar with placeable items.'
+            '自动热键',
+            '自动用可放置的项目填满你的热键栏'
         )
         scroll_pane.add({type = 'line'})
     end
@@ -372,8 +372,8 @@ local build_config_gui = (function(player, frame)
             scroll_pane,
             switch_state,
             'comfy_panel_poll_no_notify_toggle',
-            'Notify on polls',
-            'Receive a message when new polls are created and popup the poll.'
+            '通知投票情况',
+            '当新的投票被创建时，会收到一条消息，并弹出投票。'
         )
         scroll_pane.add({type = 'line'})
     end
@@ -427,7 +427,7 @@ local build_config_gui = (function(player, frame)
                 switch_state,
                 'comfy_panel_poll_trusted_toggle',
                 '投票模式',
-                '禁止不受信任的人创建投票.'
+                '禁止未受信任的人创建投票.'
             )
         end
 
