@@ -484,7 +484,7 @@ local function on_player_mined_entity(event)
 
     if entity.type == 'offshore-pump' then
         Utils.print_admins(
-            player.name .. ' mined an offshore pump at' ..
+            player.name .. ' 放置了一台海上泵' ..
             '[gps=' .. entity.position.x .. ',' .. entity.position.y .. ',' .. entity.surface.name .. ']',
             nil
         )

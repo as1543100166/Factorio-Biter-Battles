@@ -12,11 +12,11 @@ local format = string.format
 local brain = {
     [1] = {'Our Discord server is at: https://discord.com/invite/hAYW3K7J2A'},
     [2] = {
-        'Need an admin? Join our discord at: https://discord.com/invite/hAYW3K7J2A,',
-        'and report it in #support',
-        'If you are trusted, you are eligible to run the command /jail <player-name> "reason" and /free'
+        '需要管理员吗？加入我们: https://discord.com/invite/hAYW3K7J2A,',
+        '并在#支持中报告',
+        '如果你被信任，你有资格运行命令/jail<player name>“reason”和/free'
     },
-    [3] = {'Scenario repository for download:', 'https://github.com/1pulse/Factorio-Biter-Battles'},
+    [3] = {'供下载的场景存储库:', 'https://github.com/1pulse/Factorio-Biter-Battles'},
     [4] = {
         "If you're not trusted and have been playing here for awhile, ask an admin to trust you.  Use the /admins command to see if any are available."
     },
@@ -69,7 +69,7 @@ local links = {
 
 local function on_player_created(event)
     local player = game.players[event.player_index]
-    player.print('[font=' .. font .. ']' .. 'Welcome! Join us on discord >> https://discord.com/invite/hAYW3K7J2A' .. '[/font]', font_color)
+    player.print('[font=' .. font .. ']' .. 'Welcome! 汉化测试中，如有bug及时反馈' .. '[/font]', font_color)
 end
 
 commands.add_command(
@@ -144,14 +144,14 @@ commands.add_command(
             local target_player = game.players[cmd.parameter]
             if target_player then
                 if trusted[target_player.name] == false then
-                    game.print(target_player.name .. ' 已经是不被信任的了!')
+                    game.print(target_player.name .. ' 已经是未受信任的了!')
                     return
                 end
                 trusted[target_player.name] = false
-                game.print(target_player.name .. ' 现在是不被信任的.', {r = 0.22, g = 0.99, b = 0.99})
+                game.print(target_player.name .. ' 现在是未受信任的.', {r = 0.22, g = 0.99, b = 0.99})
                 for _, a in pairs(game.connected_players) do
                     if a.admin == true and a.name ~= player.name then
-                        a.print('[ADMIN]: ' .. player.name .. ' 不受信任的 ' .. target_player.name, {r = 1, g = 0.5, b = 0.1})
+                        a.print('[ADMIN]: ' .. player.name .. ' 未受信任的 ' .. target_player.name, {r = 1, g = 0.5, b = 0.1})
                     end
                 end
             end
@@ -162,11 +162,11 @@ commands.add_command(
             local target_player = game.players[cmd.parameter]
             if target_player then
                 if trusted[target_player.name] == false then
-                    game.print(target_player.name .. ' 已经是不被信任的了!')
+                    game.print(target_player.name .. ' 已经是未受信任的了!')
                     return
                 end
                 trusted[target_player.name] = false
-                game.print(target_player.name .. ' 现在是不被信任的.', {r = 0.22, g = 0.99, b = 0.99})
+                game.print(target_player.name .. ' 现在是未受信任的.', {r = 0.22, g = 0.99, b = 0.99})
             end
         end
     end

@@ -67,17 +67,17 @@ local function print_feeding_msg(player, food, flask_amount)
 	
 	if flask_amount >= 20 then
 		local enemy = get_enemy_team_of(player.force.name)
-		game.print(table.concat({colored_player_name, " fed ", formatted_amount, " flasks of ", formatted_food, " to team ", team_strings[enemy], " biters!"}), {r = 0.9, g = 0.9, b = 0.9})
-		Server.to_discord_bold(table.concat({player.name, " fed ", flask_amount, " flasks of ", food_values[food].name, " to team ", enemy, " biters!"}))
+		game.print(table.concat({colored_player_name, " 喂了 ", formatted_amount, " 瓶 ", formatted_food, " 给队伍 ", team_strings[enemy], " 的虫子!"}), {r = 0.9, g = 0.9, b = 0.9})
+		Server.to_discord_bold(table.concat({player.name, " 喂了 ", flask_amount, " 瓶 ", food_values[food].name, " 给队伍 ", enemy, " 的虫子!"}))
 	else
 		local target_team_text = "the enemy"
 		if global.training_mode then
 			target_team_text = "your own"
 		end
 		if flask_amount == 1 then
-			player.print("你喂了一瓶 " .. formatted_food .. " to " .. target_team_text .. " 团队的虫子.", {r = 0.98, g = 0.66, b = 0.22})
+			player.print("你喂了一瓶 " .. formatted_food .. " 给 " .. target_team_text .. " 团队的虫子.", {r = 0.98, g = 0.66, b = 0.22})
 		else
-			player.print("你喂了 " .. formatted_amount .. " flasks of " .. formatted_food .. " to " .. target_team_text .. " 团队的虫子", {r = 0.98, g = 0.66, b = 0.22})
+			player.print("你喂了 " .. formatted_amount .. " 瓶 " .. formatted_food .. " 给 " .. target_team_text .. " 团队的虫子", {r = 0.98, g = 0.66, b = 0.22})
 		end				
 	end	
 end

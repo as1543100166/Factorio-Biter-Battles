@@ -311,11 +311,19 @@ function Public.no_landfill_by_untrusted_user(event)
 	end
 end
 
+function Public.huoqvduiwu(player_force_name)
+	if player_force_name == "north" then return "北方" end
+	if player_force_name == "south" then return "南方" end
+	if player_force_name == "spectator" then return "观察者" end
+	return player_force_name
+end
+
 --Share chat with spectator force
 function Public.share_chat(event)
 	if not event.message or not event.player_index then return end
 	local player = game.players[event.player_index]
 	local player_name = player.name
+	local player_force_name1 = ""
 	local player_force_name = player.force.name
 	local tag = player.tag
 	if not tag then tag = "" end
@@ -327,7 +335,7 @@ function Public.share_chat(event)
 		mute_tag = "[muted] "
 	end
 
-	local msg = player_name .. tag .. " (" .. player_force_name .. "): ".. event.message
+	local msg = player_name .. tag .. " (" .. global.huoqvduiwu(player_force_name) .. "): ".. event.message
 	if not muted and (player_force_name == "north" or player_force_name == "south") then
 		game.forces.spectator.print(msg, color)
 	end
@@ -348,7 +356,7 @@ function Public.share_chat(event)
 		game.forces.south.print(msg)
 	end
 	
-	discord_msg = discord_msg .. player_name .. " (" .. player_force_name .. "): ".. event.message
+	discord_msg = discord_msg .. player_name .. " (" .. global.huoqvduiwu(player_force_name) .. "): ".. event.message
 	Server.to_discord_player_chat(discord_msg)
 end
 
@@ -396,7 +404,7 @@ function Public.spy_fish(player, event)
 				player.print(spy_time_seconds .. " 还剩几秒敌人的视野.", { r=0.98, g=0.66, b=0.22})
 			end
 		else
-			game.print(player.name .. " 派遣 " .. send_amount .. " 监视的鱼 " .. enemy_team .. " 队伍!", {r=0.98, g=0.66, b=0.22})
+			game.print(player.name .. " 派遣 " .. send_amount .. " 条鱼监视 " .. enemy_team .. " 队伍!", {r=0.98, g=0.66, b=0.22})
 			global.spy_fish_timeout[player.force.name] = game.tick + duration_per_unit * send_amount
 		end		
 	end
