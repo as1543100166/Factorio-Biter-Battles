@@ -170,7 +170,7 @@ local function show_mvps(player)
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.killscore.name .. " 分数为 " ..
+            caption = mvp.killscore.name .. " 击杀分数为 " ..
                 mvp.killscore.score
         })
         l.style.font = "default-bold"
@@ -182,7 +182,7 @@ local function show_mvps(player)
         local l = t.add({
             type = "label",
             caption = mvp.built_entities.name .. " 建造了 " ..
-                mvp.built_entities.score .. " 单位"
+                mvp.built_entities.score .. " 建筑"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
@@ -202,15 +202,15 @@ local function show_mvps(player)
             local result = {}
             table.insert(result, 'NORTH: \\n')
             table.insert(result, 'MVP 捍卫者: \\n')
-            table.insert(result, mvp.killscore.name .. " 分数为 " ..
+            table.insert(result, mvp.killscore.name .. " 击杀分数为 " ..
                              mvp.killscore.score .. "\\n")
             table.insert(result, '\\n')
             table.insert(result, 'MVP 建造大师: \\n')
             table.insert(result,
                          mvp.built_entities.name .. " 建造了 " ..
-                             mvp.built_entities.score .. " 单位\\n")
+                             mvp.built_entities.score .. " 建筑\\n")
             table.insert(result, '\\n')
-            table.insert(result, 'MVP Deaths: \\n')
+            table.insert(result, 'MVP 死亡次数: \\n')
             table.insert(result,
                          mvp.deaths.name .. " 死了 " .. mvp.deaths.score ..
                              " 次")
@@ -220,7 +220,7 @@ local function show_mvps(player)
         end
     end
 
-    local l = frame.add({type = "label", caption = "MVPs - South:"})
+    local l = frame.add({type = "label", caption = "MVPs - 南方:"})
     l.style.font = "default-listbox"
     l.style.font_color = {r = 0.99, g = 0.33, b = 0.33}
 
@@ -232,7 +232,7 @@ local function show_mvps(player)
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
             type = "label",
-            caption = mvp.killscore.name .. " 分数为 " ..
+            caption = mvp.killscore.name .. " 击杀分数为 " ..
                 mvp.killscore.score
         })
         l.style.font = "default-bold"
@@ -244,12 +244,12 @@ local function show_mvps(player)
         local l = t.add({
             type = "label",
             caption = mvp.built_entities.name .. " 建造了 " ..
-                mvp.built_entities.score .. " 单位"
+                mvp.built_entities.score .. " 建筑"
         })
         l.style.font = "default-bold"
         l.style.font_color = {r = 0.33, g = 0.66, b = 0.9}
 
-        local l = t.add({type = "label", caption = "Deaths >> "})
+        local l = t.add({type = "label", caption = "死亡次数 >> "})
         l.style.font = "default-listbox"
         l.style.font_color = {r = 0.22, g = 0.77, b = 0.44}
         local l = t.add({
@@ -264,13 +264,13 @@ local function show_mvps(player)
             local result = {}
             table.insert(result, 'SOUTH: \\n')
             table.insert(result, 'MVP 捍卫者: \\n')
-            table.insert(result, mvp.killscore.name .. " 分数为 " ..
+            table.insert(result, mvp.killscore.name .. " 击杀分数为 " ..
                              mvp.killscore.score .. "\\n")
             table.insert(result, '\\n')
             table.insert(result, 'MVP 建造大师: \\n')
             table.insert(result,
                          mvp.built_entities.name .. " 建造了 " ..
-                             mvp.built_entities.score .. " 单位\\n")
+                             mvp.built_entities.score .. " 建筑\\n")
             table.insert(result, '\\n')
             table.insert(result, 'MVP Deaths: \\n')
             table.insert(result,
@@ -354,13 +354,13 @@ local function set_victory_time()
     minutes = math.floor(minutes / 3600)
     hours = math.floor(hours / 216000)
     if hours > 0 then
-        hours = hours .. " hours and "
+        hours = hours .. " 小时 "
     else
         hours = ""
     end
     global.victory_time = "Time - " .. hours
     global.victory_time = global.victory_time .. minutes
-    global.victory_time = global.victory_time .. " minutes"
+    global.victory_time = global.victory_time .. " 分钟"
 end
 
 local function freeze_all_biters(surface)

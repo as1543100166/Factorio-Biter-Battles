@@ -22,7 +22,7 @@ commands.add_command(
         if param == 'restart' or param == 'shutdown' or param == 'restartnow' then
             goto continue
         else
-            p('[ERROR] Arguments are:\nrestart\nshutdown\nrestartnow')
+            p('[ERROR] 参数是:\nrestart\nshutdown\nrestartnow')
             return
         end
 
@@ -30,7 +30,7 @@ commands.add_command(
 
         if not global.reset_are_you_sure then
             global.reset_are_you_sure = true
-            p('[WARNING] This command will disable the soft-reset feature, run this command again if you really want to do this!')
+            p('[WARNING] 这条命令将禁用软复位功能，如果你真的想这样做，请再次运行这条命令。')
             return
         end
 
@@ -48,7 +48,7 @@ commands.add_command(
                 if global.shutdown then
                     global.shutdown = false
                 end
-                p('[WARNING] Soft-reset is disabled! Server will restart from scenario.')
+                p('[WARNING] 软复位功能被禁用! 服务器将从场景中重新启动.')
                 return
             end
         elseif param == 'restartnow' then
@@ -70,7 +70,7 @@ commands.add_command(
                 if global.restart then
                     global.restart = false
                 end
-                p('[WARNING] Soft-reset is disabled! Server will shutdown.')
+                p('[WARNING] 软复位功能被禁用! 服务器将被关闭.')
                 return
             end
         end

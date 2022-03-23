@@ -312,7 +312,7 @@ local function team_manager_gui_click(event)
 	if not element.parent then return end
 	local element = element.parent
 	if element.name ~= "team_manager_root_table" then return end		
-	if not player.admin then player.print("Only admins can manage teams.", {r = 175, g = 0, b = 0}) return end
+	if not player.admin then player.print("只有管理员可以管理团队.", {r = 175, g = 0, b = 0}) return end
 	
 	local listbox = player.gui.center["team_manager_gui"]["team_manager_root_table"]["team_manager_list_box_" .. tonumber(name)]
 	local selected_index = listbox.selected_index

@@ -69,7 +69,7 @@ local links = {
 
 local function on_player_created(event)
     local player = game.players[event.player_index]
-    player.print('[font=' .. font .. ']' .. 'Welcome! 汉化测试中，如有bug及时反馈' .. '[/font]', font_color)
+    player.print('[font=' .. font .. ']' .. '欢迎! 汉化测试中，如有bug及时反馈\n如人少请自行调节低难度 玩法介绍在左上方的说明' .. '[/font]', font_color)
 end
 
 commands.add_command(

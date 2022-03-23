@@ -76,7 +76,7 @@ function Public.soft_reset_map(old_surface, map_gen_settings, player_starting_it
         message =
             table.concat(
             {
-                '>> The world has been reshaped, welcome to ',
+                '>> 世界已被重置，欢迎来到 ',
                 global.original_surface_name,
                 ' number ',
                 tostring(global.soft_reset_counter),

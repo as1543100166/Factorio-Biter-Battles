@@ -1354,7 +1354,7 @@ end
 
 function Class.send_poll_result_to_discord(id)
     if type(id) ~= 'number' then
-        Server.to_discord_embed('poll-id must be a number')
+        Server.to_discord_embed('投票-id必须是一个数字')
         return
     end
 

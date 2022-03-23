@@ -196,10 +196,10 @@ local fortress_functions = {
         local this = Fullness.get()
         if event.element.switch_state == 'left' then
             this.fullness_enabled = true
-            get_actor(event, '{Fullness}', 'has enabled the inventory fullness function.')
+            get_actor(event, '{Fullness}', '启用了存货充盈功能.')
         else
             this.fullness_enabled = false
-            get_actor(event, '{Fullness}', 'has disabled the inventory fullness function.')
+            get_actor(event, '{Fullness}', '已经禁用了存货充盈功能。')
         end
     end,
     ['comfy_panel_offline_players'] = function(event)
@@ -224,7 +224,7 @@ local fortress_functions = {
             get_actor(
                 event,
                 '{Collapse}',
-                'has disabled the collapse function. You must reach zone 2 for collapse to occur!'
+                '已经禁用了塌陷功能。你必须到达2区才能发生塌陷!'
             )
         end
     end,
@@ -252,10 +252,10 @@ local fortress_functions = {
         local this = WPT.get()
         if event.element.switch_state == 'left' then
             this.void_or_tile = 'out-of-map'
-            get_actor(event, '{Void}', 'has changes the tiles of the zones to: out-of-map (void)')
+            get_actor(event, '{Void}', '已将各区的地砖改为：out-of-map (void)')
         else
             this.void_or_tile = 'lab-dark-2'
-            get_actor(event, '{Void}', 'has changes the tiles of the zones to: dark-tiles (flammable tiles)')
+            get_actor(event, '{Void}', '已将各区的瓷砖改为：dark-tiles（易燃瓷砖）')
         end
     end,
     ['comfy_panel_trusted_only_car_tanks'] = function(event)
@@ -263,10 +263,10 @@ local fortress_functions = {
         local this = WPT.get()
         if event.element.switch_state == 'left' then
             this.trusted_only_car_tanks = true
-            get_actor(event, '{Market}', 'has changed so only trusted people can buy car/tanks.', true)
+            get_actor(event, '{Market}', '已经改变了，只有受信任的人才能购买汽车/坦克.', true)
         else
             this.trusted_only_car_tanks = false
-            get_actor(event, '{Market}', 'has changed so everybody can buy car/tanks.', true)
+            get_actor(event, '{Market}', '已经改变，所以每个人都可以购买汽车/坦克.', true)
         end
     end
 }
@@ -503,8 +503,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_disable_fullness',
-                'Inventory Fullness',
-                'Left = Enables inventory fullness.\nRight = Disables inventory fullness.'
+                '存货充实',
+                'Left = 启用库存充实度。Right = 禁用库存充实度。'
             )
 
             scroll_pane.add({type = 'line'})
@@ -519,8 +519,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_offline_players',
-                'Offline Players',
-                'Left = Enables offline player inventory drop.\nRight = Disables offline player inventory drop.'
+                '离线玩家',
+                '左 = 启用离线玩家库存下降。右 = 禁用离线玩家库存下降。.'
             )
 
             scroll_pane.add({type = 'line'})
@@ -533,8 +533,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_collapse_grace',
-                'Collapse',
-                'Left = Enables collapse after wave 100.\nRight = Disables collapse - you must reach zone 2 for collapse to occur.'
+                '塌陷',
+                '左=在第100波后启用崩溃。右=禁用崩溃--你必须到达第2区才能发生崩溃。'
             )
 
             scroll_pane.add({type = 'line'})
@@ -547,8 +547,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_spill_items_to_surface',
-                'Spill Ores',
-                'Left = Enables ore spillage to surface when mining.\nRight = Disables ore spillage to surface when mining.'
+                '溢出的矿石',
+                '左 = 采矿时启用矿石溢出到地面。右 = 采矿时禁用矿石溢出到地面。.'
             )
             scroll_pane.add({type = 'line'})
 
@@ -560,8 +560,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_void_or_tile',
-                'Void Tiles',
-                'Left = Changes the tiles to out-of-map.\nRight = Changes the tiles to lab-dark-2'
+                '虚空砖',
+                '左 = 将瓷砖改为地图外。右 = 将瓷砖改为实验室黑暗-2。'
             )
             scroll_pane.add({type = 'line'})
 
@@ -573,8 +573,8 @@ local build_config_gui = (function(player, frame)
                 scroll_pane,
                 switch_state,
                 'comfy_panel_trusted_only_car_tanks',
-                'Market Purchase',
-                'Left = Allows only trusted people to buy car/tanks.\nRight = Allows everyone to buy car/tanks.'
+                '市场购买',
+                '左 = 只允许受信任的人购买汽车/坦克。右 = 允许所有人购买汽车/坦克。'
             )
             scroll_pane.add({type = 'line'})
         end
